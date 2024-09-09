@@ -1,0 +1,13 @@
+ion-header {
+
+
+    ion-toolbar, ion-button{
+      --background: #eece19;
+      padding: 0 10px;
+    }
+  }
+  
+  ion-content {
+    --background:linear-gradient(90deg, rgb(20, 22, 24)0%, rgb(33, 35, 37)35%, rgb(53, 54, 56) 100%);
+    
+  }

@@ -1,27 +1,13 @@
-#container {
-  text-align: center;
+ion-header {
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+
+  ion-toolbar, ion-button{
+    --background: #eece19;
+    padding: 0 10px;
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+ion-content {
+  --background:linear-gradient(90deg, rgb(20, 22, 24)0%, rgb(33, 35, 37)35%, rgb(53, 54, 56) 100%);
+  
 }
