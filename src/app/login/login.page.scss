@@ -1,13 +1,38 @@
 ion-header {
-
-
-    ion-toolbar, ion-button{
-      --background: #f7f7f7;
-      padding: 0 10px;
-    }
+  ion-toolbar, ion-button{
+    --background: #f7f7f700;
+    padding: 0 10px;
   }
+}
+
+ion-content {
+  --background:linear-gradient(90deg, rgb(20, 22, 24)0%, rgb(33, 35, 37)35%, rgb(53, 54, 56) 100%);
   
-  ion-content {
-    --background:linear-gradient(90deg, rgb(20, 22, 24)0%, rgb(33, 35, 37)35%, rgb(53, 54, 56) 100%);
-    
-  }
+}
+ion-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16px;
+}
+
+.card-container {
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+  
+.custom-card {
+  float: inline-end;
+  width: 400px;
+  height: 250px;
+
+}
+
+.transparent-button {
+  --background: transparent;
+  --color: #3880ff;
+  --border-color: transparent; 
+  --box-shadow: none;
+}

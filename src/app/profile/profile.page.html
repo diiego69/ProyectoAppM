@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenido, {{ user?.username }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Nombre:</strong> {{ user?.name }}</p>
+      <p><strong>Carrera:</strong> {{ user?.carrera }}</p>
+      <p><strong>Jornada:</strong> {{ user?.jornada }}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-button (click)="logout()">Cerrar sesión</ion-button>
+  <ion-button (click)="goToProfile()">Inicio</ion-button>
+</ion-content>
