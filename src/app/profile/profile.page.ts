@@ -16,13 +16,13 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.user = this.authService.getUserData();
     if (!this.user) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/start']);
     }
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/start']);
   }
 
   goToProfile() {

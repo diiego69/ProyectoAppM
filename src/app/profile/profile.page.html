@@ -7,7 +7,7 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Bienvenido, {{ user?.username }}</ion-card-title>
+      <ion-card-title style="text-align: center;">Datos del Usuario</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p><strong>Nombre:</strong> {{ user?.name }}</p>
@@ -16,5 +16,5 @@
     </ion-card-content>
   </ion-card>
   <ion-button (click)="logout()">Cerrar sesión</ion-button>
-  <ion-button (click)="goToProfile()">Inicio</ion-button>
+  <ion-button (click)="goToProfile()">Menu</ion-button>
 </ion-content>

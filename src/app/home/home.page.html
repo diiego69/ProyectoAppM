@@ -5,10 +5,12 @@
         <ion-icon name="apps"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <a><h1 class="menu" >Menu</h1></a>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="navigateToLogin()">Login</ion-button>
+  <ion-button (click)="navigateToLogin()">Cerrar sesión</ion-button>
   <ion-button (click)="goToProfile()">Perfil</ion-button>
+  <ion-card-title class="menu">Bienvenido, {{ user?.name }}</ion-card-title>
 </ion-content>

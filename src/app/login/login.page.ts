@@ -8,14 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-
   username: string = '';
   password: string = '';
+  currentPasswordVisible: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  togglePasswordVisibility() {
+    this.currentPasswordVisible = !this.currentPasswordVisible;
+  }
+
   onSubmit() {
-    this.authService.login(this.username, this.password).subscribe(
+    const minUsername = this.username.toLocaleLowerCase();
+    this.authService.login(minUsername, this.password).subscribe(
       response => {
         if (response) {
           this.router.navigate(['/home']);
@@ -28,5 +33,9 @@ export class LoginPage {
         alert('Ocurrió un error durante el inicio de sesión');
       }
     );
+  }
+
+  navigateToChangePassword(){
+    this.router.navigate(['/change-password']);
   }
 }

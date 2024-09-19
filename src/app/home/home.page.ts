@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,16 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private router: Router) {}
+  user: any = {};
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit() {
+    this.user = this.authService.getUserData();
+    if (!this.user) {
+      this.router.navigate(['/start']);
+    }
+  }
 
   navigateToLogin() {
     this.router.navigate(['/login']);

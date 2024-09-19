@@ -7,11 +7,35 @@ import { delay } from 'rxjs/operators';
 })
 export class AuthService {
   private users = [
-    { username: 'admin', password: 'admin', name: 'Administrador', carrera: 'administrador', jornada: 'Completa',},
-    { username: 'diego', password: 'diego', name: 'Diego Gonzalez', carrera: 'Ing. Informatica', jornada: 'Vespertina',}
+    { id: 1, username: 'admin', password: 'admin', name: 'Administrador', carrera: 'administrador', jornada: 'Completa',},
+    { id: 2, username: 'die.gonzalez', password: 'diego', name: 'Diego Gonzalez', carrera: 'Ing. Informatica', jornada: 'Vespertina',},
+    { id: 3, username: 'bi.morales', password: 'benjamin', name: 'Benjamin Morales', carrera: 'Ing. Informatica', jornada: 'Vespertina',}
   ];
 
   constructor() { }
+
+  getUserById(id: number) {
+    return this.users.find(user => user.id === id);
+  }
+
+  updatePasswordByUsername(username: string, newPassword: string): boolean {
+    const user = this.getUserByUsername(username);
+    if (user) {
+      user.password = newPassword;
+
+      const currentUser = this.getUserData();
+      if (currentUser && currentUser.username === username) {
+        currentUser.password = newPassword;
+        localStorage.setItem('user', JSON.stringify(currentUser));
+      }
+      return true;
+    }
+    return false;
+  }
+
+  getUserByUsername(username: string) {
+    return this.users.find(user => user.username === username);
+  }
 
   login(username: string, password: string): Observable<any> {
     const user = this.users.find(user => user.username === username && user.password === password);
