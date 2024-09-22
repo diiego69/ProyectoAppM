@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'start',  // Página de inicio
+    redirectTo: 'start', 
     pathMatch: 'full'
   },
   {
@@ -21,7 +21,9 @@ const routes: Routes = [
   },
   {
     path: 'change-password', loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
-  }
+  },
+  
+
 ];
 
 @NgModule({

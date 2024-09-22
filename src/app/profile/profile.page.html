@@ -1,5 +1,10 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="goToback()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,6 +20,4 @@
       <p><strong>Jornada:</strong> {{ user?.jornada }}</p>
     </ion-card-content>
   </ion-card>
-  <ion-button (click)="logout()">Cerrar sesión</ion-button>
-  <ion-button (click)="goToProfile()">Menu</ion-button>
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-change-password',
@@ -17,7 +18,7 @@ export class ChangePasswordPage {
   newPasswordVisible: boolean = false;
   confirmPasswordVisible: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService, private navController: NavController) {}
 
   toggleCurrentPasswordVisibility() {
     this.currentPasswordVisible = !this.currentPasswordVisible;
@@ -60,5 +61,8 @@ export class ChangePasswordPage {
 
   goToLogin() {
     this.router.navigate(['/login']);
+  }
+  volver() {
+    this.navController.back();
   }
 }

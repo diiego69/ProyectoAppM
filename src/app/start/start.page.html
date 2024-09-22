@@ -1,15 +1,31 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Bienvenido</ion-title>
+   
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="card-container">
-    <ion-card class="custom-card">
-      <div class="button-container">
-        <ion-button class="login-button" (click)="navigateToLogin()">Login</ion-button>
+
+<ion-card class="ion-no-margin">
+  <ion-img src="assets/icon/header.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title class="text-center">
+        Bienvenido
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-subtitle class="custom-text ion-text-lowercase">
+      <div class="text-box">
+        Esta aplicación permite a docentes de Duoc UC registrar la asistencia de sus alumnos de manera rápida y eficiente, facilitando el seguimiento del rendimiento académico y mejorando la gestión del aula.
+      </div>  
+    </ion-card-subtitle>
+    
+    <ion-card-content>
+      <div class="signin-btns">
+        <ion-button class="login-button" size="small" shape="round"  (click)="navigateToLogin()">iniciar sesion</ion-button>
       </div>
-    </ion-card>
-  </div>
+    </ion-card-content>
+  
+    
+  </ion-card>
 </ion-content>

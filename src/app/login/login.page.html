@@ -1,24 +1,32 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="goToback()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <div class="card-container">
-    <ion-card class="custom-card">
-      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <ion-item>
-          <ion-label position="floating">Usuario</ion-label>
-          <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
-        </ion-item>
-        <ion-button expand="full" type="submit" [disabled]="!loginForm.form.valid">Iniciar sesión</ion-button>
-        <ion-button (click)="navigateToChangePassword()" class="transparent-button" size="small" expand="full">Cambiar contraseña</ion-button>
-      </form>
-    </ion-card>
+  <div id="header">
+    <h1>Login</h1>
+    <img src="./assets/icon/icono.jpeg"> 
   </div>
+  <form id="form"  (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+    </ion-item>
+    <div class="button-container">
+      <ion-button shape="round" type="submit" [disabled]="!loginForm.form.valid">Iniciar sesión</ion-button>
+      <ion-button shape="round"  (click)="navigateToChangePassword()"  >Cambiar contraseña</ion-button>
+    </div>
+  </form>
+
 </ion-content>

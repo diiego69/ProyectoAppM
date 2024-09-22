@@ -25,7 +25,7 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/start']);
   }
 
-  goToProfile() {
+  goToback() {
     this.router.navigate(['/home']);
   }
 }
