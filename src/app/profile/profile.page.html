@@ -1,0 +1,23 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary" (click)="goToback()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Datos del Usuario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Nombre:</strong> {{ user?.name }}</p>
+      <p><strong>Carrera:</strong> {{ user?.carrera }}</p>
+      <p><strong>Jornada:</strong> {{ user?.jornada }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
