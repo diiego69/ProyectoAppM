@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-buttons slot="start">
+    <ion-button color="primary" (click)="goToback()">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-toolbar>
+    <ion-title>Error 404</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="error-container">
+    <h1>404</h1>
+    <p>Lo sentimos, la página que buscas no existe.</p>
+    <ion-button routerLink="/">Volver a Inicio</ion-button>
+  </div>
+</ion-content>
