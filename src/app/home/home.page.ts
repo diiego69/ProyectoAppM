@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { MenuController } from '@ionic/angular';
-import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint, CapacitorBarcodeScannerTypeHintALLOption } from '@capacitor/barcode-scanner';
+import { MenuController, AlertController } from '@ionic/angular';
+import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';
 import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
@@ -11,11 +11,15 @@ import { Geolocation } from '@capacitor/geolocation';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   user: any = {};
-  capturedImage: any;  
+  result: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private menu: MenuController, ) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private menu: MenuController,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {
     this.user = this.authService.getUserData();
@@ -39,15 +43,14 @@ export class HomePage {
   goToProfile() {
     this.router.navigate(['/profile']);
   }
-  result: string = ''
 
   async scan(): Promise<void> {
     const result = await CapacitorBarcodeScanner.scanBarcode({
-      hint: CapacitorBarcodeScannerTypeHint.ALL
+      hint: CapacitorBarcodeScannerTypeHint.QR_CODE,
     });
-    this.result = result.ScanResult
-    this.getLocation();
+    this.result = result.ScanResult;
     console.log(result.ScanResult);
+    await this.getLocation();
   }
 
   async getLocation() {
@@ -56,14 +59,31 @@ export class HomePage {
       const latitud = position.coords.latitude;
       const longitud = position.coords.longitude;
       console.log(`Latitud: ${latitud}, Longitud: ${longitud}`);
-  
-      if (latitud >= -33.468 && latitud <= -33.467 && longitud >= -70.635 && longitud <= -70.634) {
-        console.log('tabien.');
+
+      let message: string;
+
+      "direccion para probar no estar en duoc (latitud >= -33.466 && latitud <= -33.464 && longitud >= -70.657 && longitud <= -70.655)"
+      "direccion duoc (latitud >= -33.4701 && latitud <= -33.4681 && longitud >= -70.6354 && longitud <= -70.6334)"
+      if (latitud >= -33.4701 && latitud <= -33.4681 && longitud >= -70.6354 && longitud <= -70.6334) {
+        message = 'Estás en Duoc';
       } else {
-        console.log('tamal.');
+        message = 'No estás en Duoc.';
       }
+
+      await this.presentAlert(message);
     } catch (error) {
-      console.error('No se pudo encontrar ubicacion:', error);
+      console.error('No se pudo encontrar ubicación:', error);
+      await this.presentAlert('Error al obtener la ubicación.');
     }
+  }
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Asistencia',
+      message: message,
+      buttons: ['Entendido'],
+    });
+
+    await alert.present();
   }
 }
