@@ -14,13 +14,9 @@ export class AuthService {
 
   private loggedIn = false;
 
-  private checkLoginStatus(): boolean {
-    return localStorage.getItem('isLoggedIn') === 'true';
-  }
-
   isLoggedIn(): boolean {
-    return this.loggedIn;
-  }
+    return localStorage.getItem('isLoggedIn') === 'true';
+}
 
   constructor() { }
 
@@ -49,7 +45,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const user = this.users.find(user => user.username === username && user.password === password);
-
+  
     if (user) {
       this.loggedIn = true;
       localStorage.setItem('isLoggedIn', 'true');

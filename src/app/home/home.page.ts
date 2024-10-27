@@ -23,8 +23,8 @@ export class HomePage {
 
   ngOnInit() {
     this.user = this.authService.getUserData();
-    if (!this.user) {
-      this.router.navigate(['/start']);
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
     }
   }
 
@@ -37,6 +37,7 @@ export class HomePage {
   }
 
   navigateToLogin() {
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 
