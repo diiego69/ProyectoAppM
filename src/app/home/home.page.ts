@@ -26,7 +26,7 @@ export class HomePage {
   ngOnInit() {
     this.user = this.authService.getUserData();
     this.obtenerFotoPerfil();
-    if (!this.user) {
+    if (!this.authService.isLoggedIn()){
       this.router.navigate(['/start']);
     }
   }
@@ -40,6 +40,7 @@ export class HomePage {
   }
 
   navigateToLogin() {
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 

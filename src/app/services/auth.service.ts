@@ -12,6 +12,12 @@ export class AuthService {
     { id: 3, username: 'bi.morales', password: 'benjamin', name: 'Benjamin Morales', carrera: 'Ing. Informatica', jornada: 'Vespertina',}
   ];
 
+  private loggedIn = false;
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true';
+}
+
   constructor() { }
 
   getUserById(id: number) {
@@ -39,8 +45,10 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     const user = this.users.find(user => user.username === username && user.password === password);
-
+  
     if (user) {
+      this.loggedIn = true;
+      localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('user', JSON.stringify(user));
       return of({ token: 'fake-jwt-token' }).pipe(delay(500));
     } else {
@@ -54,6 +62,8 @@ export class AuthService {
   }
 
   logout() {
+    this.loggedIn = false;
+    localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('user');
   }
 }

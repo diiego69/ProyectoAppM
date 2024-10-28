@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,9 @@ const routes: Routes = [
   {
     path: 'change-password', loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
   },
-  
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
+
 
 ];
 
