@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { MenuController, AlertController } from '@ionic/angular';
 import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';
 import { Geolocation } from '@capacitor/geolocation';
+import axios from 'axios';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { Geolocation } from '@capacitor/geolocation';
 export class HomePage {
   user: any = {};
   result: string = '';
+  fotoPerfil: any;
 
   constructor(
     private authService: AuthService,
@@ -23,6 +25,7 @@ export class HomePage {
 
   ngOnInit() {
     this.user = this.authService.getUserData();
+    this.obtenerFotoPerfil();
     if (!this.user) {
       this.router.navigate(['/start']);
     }
@@ -85,5 +88,14 @@ export class HomePage {
     });
 
     await alert.present();
+  }
+  async obtenerFotoPerfil() {
+    try {
+      const response = await axios.get('https://randomuser.me/api/');
+      const foto = response.data.results[0].picture.large;
+      this.fotoPerfil = foto;
+    } catch (error) {
+      console.error('Error al obtener la foto de perfil', error);
+    }
   }
 }
