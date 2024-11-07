@@ -15,6 +15,7 @@ export class HomePage {
   user: any = {};
   result: string = '';
   fotoPerfil: any;
+  selectedView: string = 'inicio';
 
   constructor(
     private authService: AuthService,
