@@ -23,9 +23,18 @@
           <ion-icon name="menu"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>Inicio</ion-title>
+      <ion-segment [(ngModel)]="selectedView">
+        <ion-segment-button value="inicio">
+          <ion-label>Inicio</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="horario">
+          <ion-label>Horario</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </ion-toolbar>
+  </ion-header>
 
+  <ion-content id="main-content">
     <ion-item lines="none">
       <ion-avatar slot="start">
         <img *ngIf="fotoPerfil" [src]="fotoPerfil" alt="Foto de Perfil">
@@ -35,22 +44,35 @@
         <h3>{{ user?.name }}</h3>
       </ion-label>
     </ion-item>
-  </ion-header>
+    <div [ngSwitch]="selectedView">
+      <div *ngSwitchCase="'inicio'">
+        <div class="mycontainer">
+          <a (click)="goToProfile()">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Perfil</ion-card-title>
+                <ion-card-subtitle>Revisa tu Perfil</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </a>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title (click)="scan()">Escanear codigo Qr</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          <div *ngSwitchCase="'reportes'">
 
-  <ion-content id="main-content">
-    <a (click)="goToProfile()">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Perfil</ion-card-title>
-          <ion-card-subtitle>Revisa tu Perfil</ion-card-subtitle>
-        </ion-card-header>
-      </ion-card>
-    </a>
 
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title (click)="scan()">Escanear codigo Qr</ion-card-title>
-        </ion-card-header>
-      </ion-card>
+
+
+
+
+
+
+            
+          </div>
+        </div>  
+      </div>
+    </div>
   </ion-content>
 </ion-app>
