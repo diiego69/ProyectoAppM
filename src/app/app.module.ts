@@ -11,6 +11,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+
 const routes: Routes = [
   { path: 'home', component: HomePage, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfilePage, canActivate: [AuthGuard] },
@@ -22,8 +23,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [AppComponent, NotFoundComponent,],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
-  exports: [RouterModule]
+  providers: [ { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],  bootstrap: [AppComponent],
+  exports: [RouterModule],
+  
 })
 export class AppModule {}

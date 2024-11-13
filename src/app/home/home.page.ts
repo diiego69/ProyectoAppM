@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MenuController, AlertController } from '@ionic/angular';
-import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';
 import { Geolocation } from '@capacitor/geolocation';
 import axios from 'axios';
+import { CapacitorBarcodeScanner } from '@capacitor/Barcode-Scanner';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +32,22 @@ export class HomePage {
     }
   }
 
+  async scan(val?: number) {
+    try {
+      const result = await CapacitorBarcodeScanner.scanBarcode({
+        hint: val || 17,
+        cameraDirection: 1,
+      });
+      console.log(result);
+      await this.getLocation();
+      return result.ScanResult;
+    } catch (e) {
+      console.error('Error scanning barcode:', e);
+      throw e;
+    }
+  }
+  
+
   openMenu() {
     this.menu.open();
   }
@@ -49,14 +65,7 @@ export class HomePage {
     this.router.navigate(['/profile']);
   }
 
-  async scan(): Promise<void> {
-    const result = await CapacitorBarcodeScanner.scanBarcode({
-      hint: CapacitorBarcodeScannerTypeHint.QR_CODE,
-    });
-    this.result = result.ScanResult;
-    console.log(result.ScanResult);
-    await this.getLocation();
-  }
+
 
   async getLocation() {
     try {
@@ -67,9 +76,10 @@ export class HomePage {
 
       let message: string;
 
-      "direccion para probar no estar en duoc (latitud >= -33.466 && latitud <= -33.464 && longitud >= -70.657 && longitud <= -70.655)"
-      "direccion duoc (latitud >= -33.4701 && latitud <= -33.4681 && longitud >= -70.6354 && longitud <= -70.6334)"
-      if (latitud >= -33.4701 && latitud <= -33.4681 && longitud >= -70.6354 && longitud <= -70.6334) {
+      
+      if (latitud >= -33.51163801421546 && latitud <= -33.49363801421546 && 
+        longitud >= -70.66610907163472 && longitud <= -70.64810907163472
+        ) {
         message = 'Estás en Duoc';
       } else {
         message = 'No estás en Duoc.';

@@ -1,7 +1,8 @@
 {
   "name": "ProyectoAppM",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
