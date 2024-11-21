@@ -39,6 +39,16 @@
             "jornada": "Diurna",
             "carrera": "Ingenieria Electromotriz",
             "horario": 2
+        },
+        {
+            "id":5,
+            "name": "pepe",
+            "password": "pepe",
+            "fullname": "Pepe Gomez",
+            "email": "pepe.g@duocuc.cl",
+            "jornada": "Vespertina",
+            "carrera": "Ingenieria Electromotriz",
+            "horario": 2
         }
     ],
 
