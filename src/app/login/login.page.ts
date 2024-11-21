@@ -29,12 +29,14 @@ export class LoginPage {
                 this.username = '';
                 this.password = '';
             } else {
-                alert('Credenciales incorrectas');
+              this.errorMessage = 'Credenciales incorrectas';
+              alert(this.errorMessage);
             }
         },
         error => {
-            console.error('Error durante el inicio de sesión', error);
-            alert('Ocurrió un error durante el inicio de sesión');
+          console.error('Error durante el inicio de sesión', error);
+          this.errorMessage = 'Ocurrió un error durante el inicio de sesión';
+          alert(this.errorMessage);
         }
     );
   }

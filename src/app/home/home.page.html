@@ -44,6 +44,7 @@
         <h3>{{ user?.name }}</h3>
       </ion-label>
     </ion-item>
+
     <div [ngSwitch]="selectedView">
       <div *ngSwitchCase="'inicio'">
         <div class="mycontainer">
@@ -60,19 +61,41 @@
               <ion-card-title (click)="scan()">Escanear codigo Qr</ion-card-title>
             </ion-card-header>
           </ion-card>
-          <div *ngSwitchCase="'reportes'">
+        </div>
+      </div>
 
-
-
-
-
-
-
-
-            
-          </div>
-        </div>  
+      <div *ngSwitchCase="'horario'">
+        <ion-card *ngIf="horario && horario.id">
+          <ion-card-header>
+            <ion-card-title>Tu Horario</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div *ngIf="horario">
+              <div *ngFor="let day of ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']">
+                <ion-item *ngIf="horario[day]">
+                  <ion-label>
+                    <h3>{{ day }}</h3>
+                    <ul>
+                      <li *ngFor="let modulo of horario[day]">
+                        <div *ngFor="let mod of modulo.modulo1">
+                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                        </div>
+                        <div *ngFor="let mod of modulo.modulo2">
+                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                        </div>
+                        <div *ngFor="let mod of modulo.modulo3">
+                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </ion-label>
+                </ion-item>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
       </div>
     </div>
   </ion-content>
 </ion-app>
+

@@ -13,9 +13,13 @@ import { CapacitorBarcodeScanner } from '@capacitor/Barcode-Scanner';
 })
 export class HomePage {
   user: any = {};
-  result: string = '';
+  horario: any = {};
+  ramos: any[] = []; 
   fotoPerfil: any;
   selectedView: string = 'inicio';
+  currentHour: number = 0;
+  currentMinutes: number = 0;
+  horaAsistencia: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -24,12 +28,56 @@ export class HomePage {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {
-    this.user = this.authService.getUserData();
-    this.obtenerFotoPerfil();
-    if (!this.authService.isLoggedIn()){
-      this.router.navigate(['/start']);
+    ngOnInit() {
+      if (!this.authService.isLoggedIn()) {
+        this.router.navigate(['/start']);
+        return;
+      }
+      this.user = this.authService.getUserData();
+      if (this.user) {
+        this.horario = this.authService.getHorarioByUserId(this.user.id);
+      }
+      this.ramos = this.authService.ramos;
+      this.obtenerFotoPerfil();
     }
+
+  getCurrentTime() {
+    const now = new Date();
+    this.currentHour = now.getHours();
+    this.currentMinutes = now.getMinutes();
+    this.horaAsistencia = this.currentHour*100 + this.currentMinutes;
+  }
+
+  getUserAndHorario() {
+    const userData = this.authService.getUserData();
+    if (userData) {
+      this.user = userData;
+      this.getUserSchedule(this.user.id);
+    }
+  }
+
+  getUserSchedule(userId: number) {
+    const horarios = this.authService.horario;
+    const userSchedule = horarios.find((horario: any) => horario.id === userId);
+
+    if (userSchedule) {
+      this.horario = userSchedule;
+    }
+  }
+
+  convertToTimeFormat(num: number): string {
+    const hours = Math.floor(num / 100);
+    const minutes = num % 100;
+    return `${this.padTime(hours)}:${this.padTime(minutes)}`;
+  }
+
+  padTime(time: number): string {
+    return time < 10 ? `0${time}` : `${time}`;
+  }
+
+  getRamoName(ramoId: number): string {
+    const ramo = this.ramos.find((r: any) => r.id === ramoId);
+    return ramo ? ramo.nombre : 'Desconocido';
   }
 
   async scan(val?: number) {
@@ -80,8 +128,11 @@ export class HomePage {
       if (latitud >= -33.51163801421546 && latitud <= -33.49363801421546 && 
         longitud >= -70.66610907163472 && longitud <= -70.64810907163472
         ) {
+        this.getCurrentTime();
+        console.log(this.horaAsistencia);
         message = 'Estás en Duoc';
-      } else {
+      } 
+      else {
         message = 'No estás en Duoc.';
       }
 
