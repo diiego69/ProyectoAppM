@@ -1,0 +1,377 @@
+{
+    "usuarios":[
+        {
+            "id":1,
+            "name": "admin",
+            "password": "admin",
+            "fullname": "administrador",
+            "email": "admin@duoc.cl",
+            "jornada": "Completa",
+            "carrera": "administrador",
+            "horario": 0
+        },
+        {
+            "id":2,
+            "name": "diego",
+            "password": "diego",
+            "fullname": "Diego Gonzalez",
+            "email": "die.gonzalezn@duocuc.cl",
+            "jornada": "Vespertina",
+            "carrera": "Ingenieria Informatica",
+            "horario": 1
+        },
+        {
+            "id":3,
+            "name": "benjamin",
+            "password": "benjamin",
+            "fullname": "Benjamin Morales",
+            "email": "bi.morales@duocuc.cl",
+            "jornada": "Vespertina",
+            "carrera": "Ingenieria Informatica",
+            "horario": 1
+        },
+        {
+            "id":4,
+            "name": "juan",
+            "password": "juan",
+            "fullname": "Juan Perez",
+            "email": "juan.p@duocuc.cl",
+            "jornada": "Diurna",
+            "carrera": "Ingenieria Electromotriz",
+            "horario": 2
+        },
+        {
+            "id":5,
+            "name": "pepe",
+            "password": "pepe",
+            "fullname": "Pepe Gomez",
+            "email": "pepe.g@duocuc.cl",
+            "jornada": "Vespertina",
+            "carrera": "Ingenieria Electromotriz",
+            "horario": 2
+        }
+    ],
+
+    "ramos":[
+        {
+            "id":1,
+            "nombre":"PROGRAMACION DE APLICACIONES MOVILES",
+            "siglas":"008V"
+        },
+        {
+            "id":2,
+            "nombre":"ARQUITECTURA",
+            "siglas":"008V"
+        },
+        {
+            "id":3,
+            "nombre":"CALIDAD DE SOFTWARE",
+            "siglas":"008V"
+        },
+        {
+            "id":4,
+            "nombre":"ARQUITECTURA",
+            "siglas":"008V"
+        },
+        {
+            "id":5,
+            "nombre":"ESTADISTICA DESCRIPTIVA",
+            "siglas":"010V"
+        },
+        {
+            "id":6,
+            "nombre":"ARQUITECTURA",
+            "siglas":"008V"
+        }, 
+        {
+            "id":7,
+            "nombre":"ETICA PARA EL TRABAJO",
+            "siglas":"006V"
+        },
+        {
+            "id":8,
+            "nombre":"INGLES INTERMEDIO",
+            "siglas":"018V"
+        },
+        {
+            "id":9,
+            "nombre":"PROCESO DE PORTAFOLIO 4",
+            "siglas":"008V"
+        },
+        {
+            "id":10,
+            "nombre":"AUTOTRONICA CIRCUITOS CORRIENTE CONTINUA",
+            "siglas":"003D"
+        },
+        {
+            "id":11,
+            "nombre":"MANTENIMIENTO AUTOMOTRIZ",
+            "siglas":"003D"
+        },
+        {
+            "id":12,
+            "nombre":"HERRAMIENTAS APLICADAS AL MANTENIMIENTO",
+            "siglas":"003D"
+        },
+        {
+            "id":13,
+            "nombre":"HABILIDADES BASICAS DE COMUNICACION",
+            "siglas":"010D"
+        },
+        {
+            "id":14,
+            "nombre":"NIVELACION MATEMATICA",
+            "siglas":"014D"
+        }
+    ],
+    
+    "horario":[
+        {
+            "id":0,
+            "Lunes":"",
+            "Martes":"",
+            "Miercoles":"",
+            "Jueves":"",
+            "Viernes":""
+        }
+        ,{
+            "id":1,
+            "Lunes":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1900,
+                            "hora_fin":2020,
+                            "ramo":7
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":2030,
+                            "hora_fin":2150,
+                            "ramo":8
+                        }
+                    ]
+                }
+            ],
+            "Martes":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1900,
+                            "hora_fin":2020,
+                            "ramo":1
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":2040,
+                            "hora_fin":2110,
+                            "ramo":1
+                        }
+                    ],
+                    "modulo3":[
+                        {
+                            "hora_inicio":2110,
+                            "hora_fin":2230,
+                            "ramo":8
+                        }
+                    ]
+                }
+            ],
+            "Miercoles":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1900,
+                            "hora_fin":2020,
+                            "ramo":5
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":2040,
+                            "hora_fin":2150,
+                            "ramo":8
+                        }
+                    ]
+                }
+            ],
+            "Jueves":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1900,
+                            "hora_fin":2020,
+                            "ramo":1
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":2040,
+                            "hora_fin":2110,
+                            "ramo":3
+                        }
+                    ],
+                    "modulo3":[
+                        {
+                            "hora_inicio":2110,
+                            "hora_fin":2230,
+                            "ramo":3
+                        }
+                    ]
+                }
+            ],
+            "Viernes":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1900,
+                            "hora_fin":2020,
+                            "ramo":5
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":2040,
+                            "hora_fin":2110,
+                            "ramo":3
+                        }
+                    ],
+                    "modulo3":[
+                        {
+                            "hora_inicio":2110,
+                            "hora_fin":2230,
+                            "ramo":8
+                        }
+                    ]
+                }
+            ],
+            "Sabado":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1130,
+                            "hora_fin":1250,
+                            "ramo":9
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":1300,
+                            "hora_fin":1640,
+                            "ramo":6
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id":2,
+            "Lunes":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":830,
+                            "hora_fin":950,
+                            "ramo":10
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":1130,
+                            "hora_fin":1250,
+                            "ramo":13
+                        }
+                    ]
+                }
+            ],
+            "Martes":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1300,
+                            "hora_fin":1420,
+                            "ramo":14
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":1430,
+                            "hora_fin":1450,
+                            "ramo":14
+                        }
+                    ]
+                }
+            ],
+            "Miercoles":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1130,
+                            "hora_fin":1250,
+                            "ramo":10
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":1300,
+                            "hora_fin":1420,
+                            "ramo":11
+                        }
+                    ],
+                    "modulo3":[
+                        {
+                            "hora_inicio":1620,
+                            "hora_fin":1540,
+                            "ramo":13
+                        }
+                    ]
+                }
+            ],
+            "Jueves":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":830,
+                            "hora_fin":950,
+                            "ramo":12
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":1130,
+                            "hora_fin":1250,
+                            "ramo":10
+                        }
+                    ],
+                    "modulo3":[
+                        {
+                            "hora_inicio":1520,
+                            "hora_fin":1640,
+                            "ramo":11
+                        }
+                    ]
+                }
+            ],
+            "Viernes":[
+                {
+                    "modulo1":[
+                        {
+                            "hora_inicio":1130,
+                            "hora_fin":1250,
+                            "ramo":14
+                        }
+                    ],
+                    "modulo2":[
+                        {
+                            "hora_inicio":1500,
+                            "hora_fin":1700,
+                            "ramo":12
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

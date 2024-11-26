@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MenuController, AlertController } from '@ionic/angular';
-import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint } from '@capacitor/barcode-scanner';
 import { Geolocation } from '@capacitor/geolocation';
+import axios from 'axios';
+import { CapacitorBarcodeScanner } from '@capacitor/Barcode-Scanner';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,13 @@ import { Geolocation } from '@capacitor/geolocation';
 })
 export class HomePage {
   user: any = {};
-  result: string = '';
+  horario: any = {};
+  ramos: any[] = []; 
+  fotoPerfil: any;
+  selectedView: string = 'inicio';
+  currentHour: number = 0;
+  currentMinutes: number = 0;
+  horaAsistencia: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -21,12 +28,73 @@ export class HomePage {
     private alertController: AlertController
   ) {}
 
-  ngOnInit() {
-    this.user = this.authService.getUserData();
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
+    ngOnInit() {
+      if (!this.authService.isLoggedIn()) {
+        this.router.navigate(['/start']);
+        return;
+      }
+      this.user = this.authService.getUserData();
+      if (this.user) {
+        this.horario = this.authService.getHorarioByUserId(this.user.id);
+      }
+      this.ramos = this.authService.ramos;
+      this.obtenerFotoPerfil();
+    }
+
+  getCurrentTime() {
+    const now = new Date();
+    this.currentHour = now.getHours();
+    this.currentMinutes = now.getMinutes();
+    this.horaAsistencia = this.currentHour*100 + this.currentMinutes;
+  }
+
+  getUserAndHorario() {
+    const userData = this.authService.getUserData();
+    if (userData) {
+      this.user = userData;
+      this.getUserSchedule(this.user.id);
     }
   }
+
+  getUserSchedule(userId: number) {
+    const horarios = this.authService.horario;
+    const userSchedule = horarios.find((horario: any) => horario.id === userId);
+
+    if (userSchedule) {
+      this.horario = userSchedule;
+    }
+  }
+
+  convertToTimeFormat(num: number): string {
+    const hours = Math.floor(num / 100);
+    const minutes = num % 100;
+    return `${this.padTime(hours)}:${this.padTime(minutes)}`;
+  }
+
+  padTime(time: number): string {
+    return time < 10 ? `0${time}` : `${time}`;
+  }
+
+  getRamoName(ramoId: number): string {
+    const ramo = this.ramos.find((r: any) => r.id === ramoId);
+    return ramo ? ramo.nombre : 'Desconocido';
+  }
+
+  async scan(val?: number) {
+    try {
+      const result = await CapacitorBarcodeScanner.scanBarcode({
+        hint: val || 17,
+        cameraDirection: 1,
+      });
+      console.log(result);
+      await this.getLocation();
+      return result.ScanResult;
+    } catch (e) {
+      console.error('Error scanning barcode:', e);
+      throw e;
+    }
+  }
+  
 
   openMenu() {
     this.menu.open();
@@ -45,14 +113,7 @@ export class HomePage {
     this.router.navigate(['/profile']);
   }
 
-  async scan(): Promise<void> {
-    const result = await CapacitorBarcodeScanner.scanBarcode({
-      hint: CapacitorBarcodeScannerTypeHint.QR_CODE,
-    });
-    this.result = result.ScanResult;
-    console.log(result.ScanResult);
-    await this.getLocation();
-  }
+
 
   async getLocation() {
     try {
@@ -63,11 +124,15 @@ export class HomePage {
 
       let message: string;
 
-      "direccion para probar no estar en duoc (latitud >= -33.466 && latitud <= -33.464 && longitud >= -70.657 && longitud <= -70.655)"
-      "direccion duoc (latitud >= -33.4701 && latitud <= -33.4681 && longitud >= -70.6354 && longitud <= -70.6334)"
-      if (latitud >= -33.4701 && latitud <= -33.4681 && longitud >= -70.6354 && longitud <= -70.6334) {
+      
+      if (latitud >= -33.51163801421546 && latitud <= -33.49363801421546 && 
+        longitud >= -70.66610907163472 && longitud <= -70.64810907163472
+        ) {
+        this.getCurrentTime();
+        console.log(this.horaAsistencia);
         message = 'Estás en Duoc';
-      } else {
+      } 
+      else {
         message = 'No estás en Duoc.';
       }
 
@@ -86,5 +151,14 @@ export class HomePage {
     });
 
     await alert.present();
+  }
+  async obtenerFotoPerfil() {
+    try {
+      const response = await axios.get('https://randomuser.me/api/');
+      const foto = response.data.results[0].picture.large;
+      this.fotoPerfil = foto;
+    } catch (error) {
+      console.error('Error al obtener la foto de perfil', error);
+    }
   }
 }

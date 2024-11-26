@@ -23,34 +23,79 @@
           <ion-icon name="menu"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>Inicio</ion-title>
+      <ion-segment [(ngModel)]="selectedView">
+        <ion-segment-button value="inicio">
+          <ion-label>Inicio</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="horario">
+          <ion-label>Horario</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </ion-toolbar>
+  </ion-header>
 
+  <ion-content id="main-content">
     <ion-item lines="none">
       <ion-avatar slot="start">
-        <img src="assets/icon/avatar.png">
+        <img *ngIf="fotoPerfil" [src]="fotoPerfil" alt="Foto de Perfil">
       </ion-avatar>
       <ion-label>
         <p>Hola!</p>
         <h3>{{ user?.name }}</h3>
       </ion-label>
     </ion-item>
-  </ion-header>
 
-  <ion-content id="main-content">
-    <a (click)="goToProfile()">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Perfil</ion-card-title>
-          <ion-card-subtitle>Revisa tu Perfil</ion-card-subtitle>
-        </ion-card-header>
-      </ion-card>
-    </a>
+    <div [ngSwitch]="selectedView">
+      <div *ngSwitchCase="'inicio'">
+        <div class="mycontainer">
+          <a (click)="goToProfile()">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Perfil</ion-card-title>
+                <ion-card-subtitle>Revisa tu Perfil</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </a>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title (click)="scan()">Escanear codigo Qr</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </div>
+      </div>
 
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title (click)="scan()">Escanear codigo Qr</ion-card-title>
-        </ion-card-header>
-      </ion-card>
+      <div *ngSwitchCase="'horario'">
+        <ion-card *ngIf="horario && horario.id">
+          <ion-card-header>
+            <ion-card-title>Tu Horario</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div *ngIf="horario">
+              <div *ngFor="let day of ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']">
+                <ion-item *ngIf="horario[day]">
+                  <ion-label>
+                    <h3>{{ day }}</h3>
+                    <ul>
+                      <li *ngFor="let modulo of horario[day]">
+                        <div *ngFor="let mod of modulo.modulo1">
+                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                        </div>
+                        <div *ngFor="let mod of modulo.modulo2">
+                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                        </div>
+                        <div *ngFor="let mod of modulo.modulo3">
+                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </ion-label>
+                </ion-item>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
   </ion-content>
 </ion-app>
+

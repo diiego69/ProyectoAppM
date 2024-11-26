@@ -5,7 +5,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'start', 
+    redirectTo: 'start',
     pathMatch: 'full'
   },
   {
@@ -23,10 +23,7 @@ const routes: Routes = [
   {
     path: 'change-password', loadChildren: () => import('./change-password/change-password.module').then( m => m.ChangePasswordPageModule)
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
-
-
 ];
 
 @NgModule({

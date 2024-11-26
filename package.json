@@ -1,6 +1,6 @@
 {
-  "name": "ionic-app-base",
-  "version": "0.0.0",
+  "name": "ProyectoAppM",
+  "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -17,7 +17,6 @@
     "@angular/common": "^18.0.0",
     "@angular/compiler": "^18.0.0",
     "@angular/core": "^18.0.0",
-    "@angular/fire": "^18.0.1",
     "@angular/forms": "^18.0.0",
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
@@ -25,20 +24,14 @@
     "@capacitor/android": "^6.1.2",
     "@capacitor/app": "6.0.1",
     "@capacitor/barcode-scanner": "^1.0.1",
-    "@capacitor/camera": "^6.0.2",
-    "@capacitor/cli": "^6.1.2",
-    "@capacitor/core": "^6.1.2",
+    "@capacitor/core": "6.1.2",
     "@capacitor/geolocation": "^6.0.1",
     "@capacitor/haptics": "6.0.1",
     "@capacitor/keyboard": "6.0.2",
     "@capacitor/status-bar": "6.0.1",
-    "@ionic/angular": "^8.3.3",
-    "body-parser": "^1.20.3",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "firebase": "^10.13.1",
+    "@ionic/angular": "^8.0.0",
+    "axios": "^1.7.7",
     "ionicons": "^7.0.0",
-    "nodemailer": "^6.9.15",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -50,14 +43,14 @@
     "@angular-eslint/eslint-plugin-template": "^18.0.0",
     "@angular-eslint/schematics": "^18.0.0",
     "@angular-eslint/template-parser": "^18.0.0",
-    "@angular/cli": "18.2.5",
+    "@angular/cli": "^18.0.0",
     "@angular/compiler-cli": "^18.0.0",
     "@angular/language-service": "^18.0.0",
+    "@capacitor/cli": "6.1.2",
     "@ionic/angular-toolkit": "^11.0.1",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "cordova-plugin-camera": "^7.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",
@@ -69,13 +62,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "phonegap-plugin-barcodescanner": "^8.1.0",
     "typescript": "~5.4.0"
   },
-  "cordova": {
-    "plugins": {
-      "phonegap-plugin-barcodescanner": {},
-      "cordova-plugin-camera": {}
-    }
-  }
+  "description": "An Ionic project"
 }

@@ -1,34 +1,48 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
+import { of, Observable, BehaviorSubject} from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private users = [
-    { id: 1, username: 'admin', password: 'admin', name: 'Administrador', carrera: 'administrador', jornada: 'Completa',},
-    { id: 2, username: 'die.gonzalez', password: 'diego', name: 'Diego Gonzalez', carrera: 'Ing. Informatica', jornada: 'Vespertina',},
-    { id: 3, username: 'bi.morales', password: 'benjamin', name: 'Benjamin Morales', carrera: 'Ing. Informatica', jornada: 'Vespertina',}
-  ];
-
+  usuarios: any[] = [];
+  ramos: any[] = [];
+  horario: any[] = [];
+  private dataLoadedSubject = new BehaviorSubject<boolean>(false);
   private loggedIn = false;
 
   isLoggedIn(): boolean {
     return localStorage.getItem('isLoggedIn') === 'true';
 }
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.loadData();
+   }
+
+   loadData() {
+    this.http.get('assets/bd.json')
+      .subscribe((data: any) => {
+        this.usuarios = data['usuarios'];
+        this.ramos = data['ramos'];
+        this.horario = data['horario'];
+      });
+  }
+
+  waitForDataLoaded(): Observable<boolean> {
+    return this.dataLoadedSubject.asObservable();
+  }
 
   getUserById(id: number) {
-    return this.users.find(user => user.id === id);
+    return this.usuarios.find(user => user.id === id);
   }
 
   updatePasswordByUsername(username: string, newPassword: string): boolean {
     const user = this.getUserByUsername(username);
     if (user) {
       user.password = newPassword;
-
+      
       const currentUser = this.getUserData();
       if (currentUser && currentUser.username === username) {
         currentUser.password = newPassword;
@@ -40,11 +54,11 @@ export class AuthService {
   }
 
   getUserByUsername(username: string) {
-    return this.users.find(user => user.username === username);
+    return this.usuarios.find(user => user.name === username);
   }
 
   login(username: string, password: string): Observable<any> {
-    const user = this.users.find(user => user.username === username && user.password === password);
+    const user = this.usuarios.find(user => user.name === username && user.password === password);
   
     if (user) {
       this.loggedIn = true;
@@ -61,7 +75,21 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+  getHorarioByUserId(userId: number) {
+    const user = this.usuarios.find((usuario: any) => usuario.id === userId);
+    if (!user) return {};
+
+    const horarioData = this.horario.find((horario: any) => horario.id === user.horario);
+    if (!horarioData) {
+        console.error(`Horario no encontrado para el usuario con ID: ${userId}`);
+        return {};
+    }
+    
+    return horarioData;
+}
+
   logout() {
+    localStorage.clear();
     this.loggedIn = false;
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('user');
