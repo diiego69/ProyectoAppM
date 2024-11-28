@@ -28,18 +28,18 @@ export class HomePage {
     private alertController: AlertController
   ) {}
 
-    ngOnInit() {
-      if (!this.authService.isLoggedIn()) {
-        this.router.navigate(['/start']);
-        return;
-      }
-      this.user = this.authService.getUserData();
-      if (this.user) {
-        this.horario = this.authService.getHorarioByUserId(this.user.id);
-      }
-      this.ramos = this.authService.ramos;
-      this.obtenerFotoPerfil();
+  ngOnInit() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/start']);
+      return;
     }
+    this.user = this.authService.getUserData();
+    if (this.user) {
+      this.horario = this.authService.getHorarioByUserId(this.user.id);
+    }
+    this.ramos = this.authService.ramos;
+    this.obtenerFotoPerfil();
+  }
 
   getCurrentTime() {
     const now = new Date();
@@ -80,6 +80,38 @@ export class HomePage {
     return ramo ? ramo.nombre : 'Desconocido';
   }
 
+  async registrarAsistencia() {
+    const diaActual = new Date().getDate();
+    const mesActual = new Date().getMonth() + 1;
+    const anioActual = new Date().getFullYear();
+
+    const clasesHoy = this.horario[this.getDiaDeLaSemana()];
+
+    for (const clase of clasesHoy) {
+      for (const modulo of clase.modulo1) {
+        if (
+          this.horaAsistencia >= modulo.hora_inicio &&
+          this.horaAsistencia <= modulo.hora_fin
+        ) {
+          const ramoId = modulo.ramo;
+          this.registrarAsistenciaEnBaseDeDatos(ramoId, diaActual, mesActual, anioActual);
+        }
+      }
+    }
+  }
+
+  registrarAsistenciaEnBaseDeDatos(ramoId: number, dia: number, mes: number, anio: number) {
+    console.log(`Registrando asistencia: Ramo ${ramoId}, Fecha: ${dia}/${mes}/${anio}`);
+    
+    this.presentAlert(`Asistencia registrada para el ramo ${this.getRamoName(ramoId)} el ${dia}/${mes}/${anio}`);
+  }
+
+  getDiaDeLaSemana() {
+    const now = new Date();
+    const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    return dias[now.getDay() + 1];
+  }
+
   async scan(val?: number) {
     try {
       const result = await CapacitorBarcodeScanner.scanBarcode({
@@ -113,6 +145,15 @@ export class HomePage {
     this.router.navigate(['/profile']);
   }
 
+  async Asist() {
+    try {
+      this.registrarAsistencia();
+      this.getLocation();
+    }    catch (e) {
+      console.error('Error al tomar asistencia:', e);
+      throw e;
+    }
+  }
 
 
   async getLocation() {
@@ -128,8 +169,8 @@ export class HomePage {
       if (latitud >= -33.51163801421546 && latitud <= -33.49363801421546 && 
         longitud >= -70.66610907163472 && longitud <= -70.64810907163472
         ) {
-        this.getCurrentTime();
         console.log(this.horaAsistencia);
+        await this.registrarAsistencia();
         message = 'Estás en Duoc';
       } 
       else {
@@ -152,6 +193,7 @@ export class HomePage {
 
     await alert.present();
   }
+
   async obtenerFotoPerfil() {
     try {
       const response = await axios.get('https://randomuser.me/api/');

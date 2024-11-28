@@ -8,7 +8,8 @@
             "email": "admin@duoc.cl",
             "jornada": "Completa",
             "carrera": "administrador",
-            "horario": 0
+            "horario": 0,
+            "asistencia":0
         },
         {
             "id":2,
@@ -18,7 +19,8 @@
             "email": "die.gonzalezn@duocuc.cl",
             "jornada": "Vespertina",
             "carrera": "Ingenieria Informatica",
-            "horario": 1
+            "horario": 1,
+            "asistencia":1
         },
         {
             "id":3,
@@ -28,7 +30,8 @@
             "email": "bi.morales@duocuc.cl",
             "jornada": "Vespertina",
             "carrera": "Ingenieria Informatica",
-            "horario": 1
+            "horario": 1,
+            "asistencia":2
         },
         {
             "id":4,
@@ -38,7 +41,8 @@
             "email": "juan.p@duocuc.cl",
             "jornada": "Diurna",
             "carrera": "Ingenieria Electromotriz",
-            "horario": 2
+            "horario": 2,
+            "asistencia":3
         },
         {
             "id":5,
@@ -48,7 +52,8 @@
             "email": "pepe.g@duocuc.cl",
             "jornada": "Vespertina",
             "carrera": "Ingenieria Electromotriz",
-            "horario": 2
+            "horario": 3,
+            "asistencia":3
         }
     ],
 
@@ -371,6 +376,192 @@
                         }
                     ]
                 }
+            ]
+        },
+        {
+            "id": 3,
+            "Lunes": [
+                {
+                    "modulo1": [
+                        {
+                            "hora_inicio": 1900,
+                            "hora_fin": 2020,
+                            "ramo": 10
+                        }
+                    ],
+                    "modulo2": [
+                        {
+                            "hora_inicio": 2030,
+                            "hora_fin": 2150,
+                            "ramo": 13
+                        }
+                    ]
+                }
+            ],
+            "Martes": [
+                {
+                    "modulo1": [
+                        {
+                            "hora_inicio": 1900,
+                            "hora_fin": 2020,
+                            "ramo": 12
+                        }
+                    ],
+                    "modulo2": [
+                        {
+                            "hora_inicio": 2040,
+                            "hora_fin": 2110,
+                            "ramo": 14
+                        }
+                    ]
+                }
+            ],
+            "Miercoles": [
+                {
+                    "modulo1": [
+                        {
+                            "hora_inicio": 1900,
+                            "hora_fin": 2020,
+                            "ramo": 10
+                        }
+                    ],
+                    "modulo2": [
+                        {
+                            "hora_inicio": 2040,
+                            "hora_fin": 2150,
+                            "ramo": 12
+                        }
+                    ]
+                }
+            ],
+            "Jueves": [
+                {
+                    "modulo1": [
+                        {
+                            "hora_inicio": 1900,
+                            "hora_fin": 2020,
+                            "ramo": 11
+                        }
+                    ],
+                    "modulo2": [
+                        {
+                            "hora_inicio": 2040,
+                            "hora_fin": 2110,
+                            "ramo": 14
+                        }
+                    ],
+                    "modulo3": [
+                        {
+                            "hora_inicio": 2110,
+                            "hora_fin": 2230,
+                            "ramo": 13
+                        }
+                    ]
+                }
+            ],
+            "Viernes": [
+                {
+                    "modulo1": [
+                        {
+                            "hora_inicio": 1900,
+                            "hora_fin": 2020,
+                            "ramo": 12
+                        }
+                    ],
+                    "modulo2": [
+                        {
+                            "hora_inicio": 2040,
+                            "hora_fin": 2110,
+                            "ramo": 14
+                        }
+                    ]
+                }
+            ],
+            "Sabado": [
+                {
+                    "modulo1": [
+                        {
+                            "hora_inicio": 1130,
+                            "hora_fin": 1250,
+                            "ramo": 13
+                        }
+                    ],
+                    "modulo2": [
+                        {
+                            "hora_inicio": 1300,
+                            "hora_fin": 1640,
+                            "ramo": 12
+                        }
+                    ]
+                }
+            ]
+        }                
+    ],
+    "asistencia":[
+        {
+            "id": 0,
+            "registro": []
+        },
+        {
+            "id": 1,
+            "registro": [
+                {"id_clase": 7, "dia": 20, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 20, "mes": 9, "anio": 2024},
+                {"id_clase": 1, "dia": 21, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 21, "mes": 9, "anio": 2024},
+                {"id_clase": 5, "dia": 22, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 22, "mes": 9, "anio": 2024},
+                {"id_clase": 1, "dia": 23, "mes": 9, "anio": 2024},
+                {"id_clase": 3, "dia": 23, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 23, "mes": 9, "anio": 2024},
+                {"id_clase": 5, "dia": 24, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 24, "mes": 9, "anio": 2024},
+                {"id_clase": 7, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 1, "dia": 1, "mes": 10, "anio": 2024},
+                {"id_clase": 3, "dia": 1, "mes": 10, "anio": 2024},
+                {"id_clase": 8, "dia": 1, "mes": 10, "anio": 2024}
+            ]
+        },
+        {
+            "id": 2,
+            "registro": [
+                {"id_clase": 7, "dia": 27, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 27, "mes": 9, "anio": 2024},
+                {"id_clase": 1, "dia": 28, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 28, "mes": 9, "anio": 2024},
+                {"id_clase": 5, "dia": 29, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 29, "mes": 9, "anio": 2024},
+                {"id_clase": 1, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 3, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 8, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 5, "dia": 1, "mes": 10, "anio": 2024},
+                {"id_clase": 8, "dia": 1, "mes": 10, "anio": 2024},
+                {"id_clase": 10, "dia": 2, "mes": 10, "anio": 2024}
+            ]
+        },{
+            "id": 3,
+            "registro": [
+                {"id_clase": 10, "dia": 27, "mes": 9, "anio": 2024},
+                {"id_clase": 13, "dia": 27, "mes": 9, "anio": 2024},
+                {"id_clase": 11, "dia": 28, "mes": 9, "anio": 2024},
+                {"id_clase": 10, "dia": 28, "mes": 9, "anio": 2024},
+                {"id_clase": 14, "dia": 29, "mes": 9, "anio": 2024},
+                {"id_clase": 13, "dia": 29, "mes": 9, "anio": 2024},
+                {"id_clase": 12, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 13, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 12, "dia": 30, "mes": 9, "anio": 2024},
+                {"id_clase": 10, "dia": 1, "mes": 10, "anio": 2024},
+                {"id_clase": 10, "dia": 1, "mes": 10, "anio": 2024},
+                {"id_clase": 13, "dia": 2, "mes": 10, "anio": 2024},
+                {"id_clase": 14, "dia": 3, "mes": 10, "anio": 2024},
+                {"id_clase": 14, "dia": 3, "mes": 10, "anio": 2024},
+                {"id_clase": 10, "dia": 4, "mes": 10, "anio": 2024},
+                {"id_clase": 11, "dia": 4, "mes": 10, "anio": 2024},
+                {"id_clase": 14, "dia": 5, "mes": 10, "anio": 2024},
+                {"id_clase": 11, "dia": 5, "mes": 10, "anio": 2024},
+                {"id_clase": 13, "dia": 6, "mes": 10, "anio": 2024},
+                {"id_clase": 10, "dia": 6, "mes": 10, "anio": 2024}
             ]
         }
     ]
