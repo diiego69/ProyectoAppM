@@ -4,7 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { MenuController, AlertController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
 import axios from 'axios';
-import { CapacitorBarcodeScanner } from '@capacitor/Barcode-Scanner';
+import { BarcodeScanner } from "@capacitor-mlkit/barcode-scanning";
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ import { CapacitorBarcodeScanner } from '@capacitor/Barcode-Scanner';
 export class HomePage {
   user: any = {};
   horario: any = {};
-  ramos: any[] = []; 
+  ramos: any[] = [];
   fotoPerfil: any;
   selectedView: string = 'inicio';
   currentHour: number = 0;
@@ -36,16 +36,19 @@ export class HomePage {
     this.user = this.authService.getUserData();
     if (this.user) {
       this.horario = this.authService.getHorarioByUserId(this.user.id);
+      console.log('Horario cargado:', this.horario); 
     }
     this.ramos = this.authService.ramos;
     this.obtenerFotoPerfil();
+    Geolocation.getCurrentPosition();
   }
+  
 
   getCurrentTime() {
     const now = new Date();
     this.currentHour = now.getHours();
     this.currentMinutes = now.getMinutes();
-    this.horaAsistencia = this.currentHour*100 + this.currentMinutes;
+    this.horaAsistencia = this.currentHour * 100 + this.currentMinutes;
   }
 
   getUserAndHorario() {
@@ -85,48 +88,79 @@ export class HomePage {
     const mesActual = new Date().getMonth() + 1;
     const anioActual = new Date().getFullYear();
 
-    const clasesHoy = this.horario[this.getDiaDeLaSemana()];
+    const diaIndex = this.getDiaDeLaSemana();
+    console.log('Dia de la semana:', diaIndex);
+
+    const clasesHoy = this.horario[diaIndex]; 
+
+    if (!clasesHoy || !Array.isArray(clasesHoy)) {
+      console.error('clasesHoy no tiene una estructura válida:', clasesHoy);
+      return;
+    }
 
     for (const clase of clasesHoy) {
-      for (const modulo of clase.modulo1) {
-        if (
-          this.horaAsistencia >= modulo.hora_inicio &&
-          this.horaAsistencia <= modulo.hora_fin
-        ) {
-          const ramoId = modulo.ramo;
-          this.registrarAsistenciaEnBaseDeDatos(ramoId, diaActual, mesActual, anioActual);
+      if (clase.modulo1) {
+        for (const modulo of clase.modulo1) {
+          if (
+            this.horaAsistencia >= modulo.hora_inicio &&
+            this.horaAsistencia <= modulo.hora_fin
+          ) {
+            const ramoId = modulo.ramo;
+            this.registrarAsistenciaEnBaseDeDatos(ramoId, diaActual, mesActual, anioActual);
+          }
         }
+      } else {
+        console.error('Clase sin módulos definidos:', clase);
       }
     }
   }
 
   registrarAsistenciaEnBaseDeDatos(ramoId: number, dia: number, mes: number, anio: number) {
     console.log(`Registrando asistencia: Ramo ${ramoId}, Fecha: ${dia}/${mes}/${anio}`);
-    
     this.presentAlert(`Asistencia registrada para el ramo ${this.getRamoName(ramoId)} el ${dia}/${mes}/${anio}`);
   }
 
   getDiaDeLaSemana() {
     const now = new Date();
-    const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-    return dias[now.getDay() + 1];
+    return now.getDay(); // Devuelve un índice de 0 (Domingo) a 6 (Sábado)
   }
 
-  async scan(val?: number) {
+  async scan(): Promise<string[]> {
     try {
-      const result = await CapacitorBarcodeScanner.scanBarcode({
-        hint: val || 17,
-        cameraDirection: 1,
-      });
-      console.log(result);
-      await this.getLocation();
-      return result.ScanResult;
-    } catch (e) {
-      console.error('Error scanning barcode:', e);
-      throw e;
+      const isSupported = await BarcodeScanner.isSupported();
+      if (!isSupported.supported) {
+        console.error('Barcode scanner no es compatible en este dispositivo.');
+        return [];
+      }
+
+      const permissions = await BarcodeScanner.requestPermissions();
+      if (permissions.camera !== 'granted' && permissions.camera !== 'limited') {
+        console.error('Permisos de cámara no concedidos.');
+        return [];
+      }
+
+      const { barcodes } = await BarcodeScanner.scan();
+
+      try {
+        await this.getLocation();
+        console.log('Ubicación obtenida correctamente.');
+      } catch (locationError) {
+        console.error('Error al obtener la ubicación:', locationError);
+      }
+
+      try {
+        await this.registrarAsistencia();
+        console.log('Asistencia registrada correctamente.');
+      } catch (asistenciaError) {
+        console.error('Error al registrar asistencia:', asistenciaError);
+      }
+
+      return barcodes.map((barcode) => barcode.rawValue);
+    } catch (error) {
+      console.error('Error durante el escaneo:', error);
+      throw error;
     }
   }
-  
 
   openMenu() {
     this.menu.open();
@@ -147,14 +181,12 @@ export class HomePage {
 
   async Asist() {
     try {
-      this.registrarAsistencia();
       this.getLocation();
-    }    catch (e) {
+    } catch (e) {
       console.error('Error al tomar asistencia:', e);
       throw e;
     }
   }
-
 
   async getLocation() {
     try {
@@ -165,15 +197,19 @@ export class HomePage {
 
       let message: string;
 
-      
-      if (latitud >= -33.51163801421546 && latitud <= -33.49363801421546 && 
-        longitud >= -70.66610907163472 && longitud <= -70.64810907163472
-        ) {
+      if (
+        latitud >= -33.599638 && latitud <= -33.403638 &&
+        longitud >= -70.766109 && longitud <= -70.548109
+      ) {
         console.log(this.horaAsistencia);
-        await this.registrarAsistencia();
-        message = 'Estás en Duoc';
-      } 
-      else {
+        try {
+          await this.registrarAsistencia();
+          message = 'Estás en Duoc.';
+        } catch (error) {
+          console.error('Error al registrar asistencia:', error);
+          message = 'Error al registrar la asistencia.';
+        }
+      } else {
         message = 'No estás en Duoc.';
       }
 
