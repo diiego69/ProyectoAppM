@@ -1,7 +1,3 @@
-ion-content {
-    --ion-background-color:#e1eaf9 !important;
-}
-
 ion-header {
     position: absolute;
 }
@@ -11,22 +7,18 @@ ion-toolbar {
     --opacity: 0;
 }
 
-.signin-btns{
-    margin-top: 25px;
-    text-align: center;
-    color: #f0f4fa;
-}
 
 ion-button {
     height: 48px;
     font-size: 18px;
     text-transform: initial;
     border-radius: 50px;
-    --ion-color-primary: #215AB7;
+    --ion-color-primary: #7870e2a9;
   }
 
 .text-center {
     text-align: center;
+    
 }
 
 .text-box {
@@ -61,6 +53,14 @@ ion-card-subtitle {
     text-transform: lowercase; 
   }
   
-  .custom-text::first-letter {
-    text-transform: uppercase; 
-  }
+.custom-text::first-letter {
+  text-transform: uppercase; 
+}
+
+.floating-button-container {
+    position: fixed;
+    top: calc(50% + -2px); 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20; 
+}

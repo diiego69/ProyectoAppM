@@ -46,8 +46,8 @@
         },
         {
             "id":5,
-            "name": "pepe",
-            "password": "pepe",
+            "name": "p",
+            "password": "p",
             "fullname": "Pepe Gomez",
             "email": "pepe.g@duocuc.cl",
             "jornada": "Vespertina",
@@ -170,7 +170,7 @@
                     ],
                     "modulo2":[
                         {
-                            "hora_inicio":2040,
+                            "hora_inicio":2030,
                             "hora_fin":2110,
                             "ramo":1
                         }
@@ -195,7 +195,7 @@
                     ],
                     "modulo2":[
                         {
-                            "hora_inicio":2040,
+                            "hora_inicio":2030,
                             "hora_fin":2150,
                             "ramo":8
                         }
@@ -213,7 +213,7 @@
                     ],
                     "modulo2":[
                         {
-                            "hora_inicio":2040,
+                            "hora_inicio":2030,
                             "hora_fin":2110,
                             "ramo":3
                         }
@@ -238,7 +238,7 @@
                     ],
                     "modulo2":[
                         {
-                            "hora_inicio":2040,
+                            "hora_inicio":2030,
                             "hora_fin":2110,
                             "ramo":3
                         }
@@ -409,7 +409,7 @@
                     ],
                     "modulo2": [
                         {
-                            "hora_inicio": 2040,
+                            "hora_inicio": 2030,
                             "hora_fin": 2110,
                             "ramo": 14
                         }
@@ -427,8 +427,15 @@
                     ],
                     "modulo2": [
                         {
-                            "hora_inicio": 2040,
+                            "hora_inicio": 2030,
                             "hora_fin": 2150,
+                            "ramo": 12
+                        }
+                    ],
+                    "modulo3": [
+                        {
+                            "hora_inicio": 30,
+                            "hora_fin": 400,
                             "ramo": 12
                         }
                     ]
@@ -438,14 +445,14 @@
                 {
                     "modulo1": [
                         {
-                            "hora_inicio": 1900,
-                            "hora_fin": 2020,
+                            "hora_inicio": 0,
+                            "hora_fin": 820,
                             "ramo": 11
                         }
                     ],
                     "modulo2": [
                         {
-                            "hora_inicio": 2040,
+                            "hora_inicio": 2030,
                             "hora_fin": 2110,
                             "ramo": 14
                         }
@@ -463,14 +470,14 @@
                 {
                     "modulo1": [
                         {
-                            "hora_inicio": 1900,
-                            "hora_fin": 2020,
+                            "hora_inicio": 0,
+                            "hora_fin": 800,
                             "ramo": 12
                         }
                     ],
                     "modulo2": [
                         {
-                            "hora_inicio": 2040,
+                            "hora_inicio": 2030,
                             "hora_fin": 2110,
                             "ramo": 14
                         }

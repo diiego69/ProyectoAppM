@@ -1,35 +1,35 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar class="transparent-toolbar">
     <ion-buttons slot="start">
-      <ion-button color="primary" (click)="goToback()">
+      <ion-button style="color:white" (click)="goToback()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
+  <ion-card class="ion-no-margin">
+    <ion-img src="assets/icon/9495457.png"></ion-img>
+  </ion-card>
+  
   <div id="header">
     <h1>Login</h1>
-    <img src="./assets/icon/icono.jpeg"> 
+    <form id="form"  (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input [type]="currentPasswordVisible ? 'text' : 'password'" [(ngModel)]="password" name="password" required></ion-input>
+      </ion-item>
+      <div class="button-container">
+        <ion-button shape="round" type="submit" [disabled]="!loginForm.form.valid">Iniciar sesión</ion-button>
+        <ion-button shape="round"  (click)="navigateToChangePassword()"  >Cambiar contraseña</ion-button>
+      </div>
+    </form>
   </div>
-  <form id="form"  (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [type]="currentPasswordVisible ? 'text' : 'password'" [(ngModel)]="password" name="password" required></ion-input>
-      <ion-button slot="end" (click)="togglePasswordVisibility()">
-        <ion-icon [name]="currentPasswordVisible ? 'eye-off' : 'eye'"></ion-icon>
-      </ion-button>
-    </ion-item>
-    <div class="button-container">
-      <ion-button shape="round" type="submit" [disabled]="!loginForm.form.valid">Iniciar sesión</ion-button>
-      <ion-button shape="round"  (click)="navigateToChangePassword()"  >Cambiar contraseña</ion-button>
-    </div>
-  </form>
+
 
 </ion-content>

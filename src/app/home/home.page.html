@@ -1,5 +1,5 @@
 <ion-app>
-  <div class="background-image"></div> <!-- Imagen de fondo -->
+  <div class="background-image"></div>
 
   <ion-menu contentId="main-content" side="start" menuId="custom-menu" swipeGesture="true">
     <ion-content class="menu-content">
@@ -23,41 +23,25 @@
               <ion-icon slot="start" name="camera"></ion-icon>
               <ion-label>Escanear Qr</ion-label>
             </ion-item>
-            <ion-item button>
+            <ion-item button (click)="abrirVivoDuoc()">
               <ion-icon slot="start" name="images"></ion-icon>
-              <ion-label>Galería</ion-label>
+              <ion-label>Vivo Duoc</ion-label>
             </ion-item>
-            <ion-item button>
-              <ion-icon slot="start" name="logo-facebook"></ion-icon>
-              <ion-label>Facebook</ion-label>
-            </ion-item>
-            <ion-item button>
+            <ion-item button (click)="abrirGmail()">
               <ion-icon slot="start" name="logo-google"></ion-icon>
-              <ion-label>Google+</ion-label>
+              <ion-label>Gmail</ion-label>
             </ion-item>
-            <ion-item button>
-              <ion-icon slot="start" name="globe"></ion-icon>
-              <ion-label>Internet</ion-label>
+            <ion-item button (click)="abrirGoogle()">
+              <ion-icon slot="start" name="logo-google"></ion-icon>
+              <ion-label>Google</ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
+        
   
         <ion-row class="menu-items">
           <ion-col size="12">
             <ion-label class="menu-section-label">Configuración</ion-label>
-            <ion-item>
-              <ion-label>Modo oscuro</ion-label>
-              <ion-toggle disabled></ion-toggle>
-            </ion-item>
-            <ion-item>
-              <ion-label>Barra de navegación</ion-label>
-              <ion-toggle disabled></ion-toggle>
-            </ion-item>
-            <ion-item>
-              <ion-label>Wi-Fi</ion-label>
-              <ion-toggle disabled></ion-toggle>
-            </ion-item>
-  
             <ion-item button (click)="navigateToLogin()" (click)="closeMenu()">
               <ion-icon slot="start" name="log-out"></ion-icon>
               <ion-label>Cerrar sesión</ion-label>
@@ -67,18 +51,12 @@
       </ion-grid>
     </ion-content>
   </ion-menu>
-  
-  
-  
-  
-  <ion-router-outlet id="main-content"></ion-router-outlet>
-  
 
   <ion-header class="ion-no-border">
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <ion-buttons slot="start" style="color: white;">
         <ion-button (click)="openMenu()">
-          <ion-icon name="menu"></ion-icon>
+          <ion-icon class="menu-icon" name="menu"></ion-icon>
         </ion-button>
       </ion-buttons>
       <ion-segment [(ngModel)]="selectedView" class="transparent-segment">
@@ -95,6 +73,7 @@
   <ion-content id="main-content">
     <div [ngSwitch]="selectedView">
       <div *ngSwitchCase="'inicio'">
+
         <ion-card class="info-card">
           <ion-card-header>
             <div class="user-info">
@@ -111,29 +90,30 @@
             </div>
           </ion-card-header>
           <ion-card-content>
-            <ion-icon name="sunny-outline"></ion-icon>
+            <ion-icon name="sunny-outline" class="top-right-icon"></ion-icon>
             <p style="text-align: center;">¡Es un gran día para avanzar con tus tareas!</p>
           </ion-card-content>
         </ion-card>
-         
+
+        <ion-card class="info-card2">
+          <ion-card-header> 
+            Mantente siempre informado!
+          </ion-card-header> 
+          <ion-card-content> 
+            <ion-card-title>{{ mensajeActual }}</ion-card-title> 
+          </ion-card-content> 
+        </ion-card> 
+        
         <div class="floating-button-container">
-          <ion-button shape="round" fill="clear" size="default" class="rounded-button" (click)="Asist()">
+          <ion-button shape="round" fill="clear" size="default" class="rounded-button" (click)="registrarAsistencia()">
             Marcar Asistencia
           </ion-button>
         </div>
-        
-        <ion-card class="white-container">
-          <div class="action-buttons">
-
-
-            
-          </div>
-        </ion-card>
       </div>
       
 
       <div *ngSwitchCase="'horario'">
-        <ion-card *ngIf="horario && horario.id">
+        <ion-card *ngIf="horario && horario.id" class="info-card3">
           <ion-card-header>
             <ion-card-title>Tu Horario</ion-card-title>
           </ion-card-header>

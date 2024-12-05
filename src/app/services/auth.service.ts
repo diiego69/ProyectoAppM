@@ -3,30 +3,73 @@ import { of, Observable, BehaviorSubject} from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
+interface Ramo {
+  id: number;
+  alumnoId: string;
+  nombre: string;
+  siglas: string;
+}
+
+interface Usuario{
+  id: number;
+  name: string;
+  password: string;
+  fullname: string;
+  email: string;
+  jornada: string;
+  carrera: string;
+  horario: number;
+  asistencia: number;
+}
+
+interface Registro {
+  id_clase: number;
+  dia: number;
+  mes: number;
+  anio: number;
+}
+
+interface Asistencia {
+  id: number;
+  registro: Registro[];
+}
+
+interface Horario{
+  id: number;
+  Lunes:[];
+  Martes:[];
+  Miercoles:[];
+  Jueves:[];
+  Viernes:[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  usuarios: any[] = [];
-  ramos: any[] = [];
-  horario: any[] = [];
+  usuarios: Usuario[] = [];
+  ramos: Ramo[] = [];
+  horario: Horario[] = [];
+  asistencia: Asistencia[] = [];
   private dataLoadedSubject = new BehaviorSubject<boolean>(false);
-  private loggedIn = false;
+
 
   isLoggedIn(): boolean {
     return localStorage.getItem('isLoggedIn') === 'true';
-}
+  }
 
   constructor(private http: HttpClient) {
     this.loadData();
-   }
+  }
 
-   loadData() {
+  loadData() {
     this.http.get('assets/bd.json')
       .subscribe((data: any) => {
         this.usuarios = data['usuarios'];
         this.ramos = data['ramos'];
         this.horario = data['horario'];
+        this.asistencia = data['asistencia'];
+        this.dataLoadedSubject.next(true);
       });
   }
 
@@ -34,7 +77,7 @@ export class AuthService {
     return this.dataLoadedSubject.asObservable();
   }
 
-  getUserById(id: number) {
+  getUserById(id: number): Usuario | undefined {
     return this.usuarios.find(user => user.id === id);
   }
 
@@ -53,15 +96,14 @@ export class AuthService {
     return false;
   }
 
-  getUserByUsername(username: string) {
+  getUserByUsername(username: string): Usuario | undefined {
     return this.usuarios.find(user => user.name === username);
   }
 
   login(username: string, password: string): Observable<any> {
     const user = this.usuarios.find(user => user.name === username && user.password === password);
-  
+
     if (user) {
-      this.loggedIn = true;
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('user', JSON.stringify(user));
       return of({ token: 'fake-jwt-token' }).pipe(delay(500));
@@ -86,11 +128,28 @@ export class AuthService {
     }
     
     return horarioData;
-}
+  }
+  
+  getAsistenciaByUserId(userId: number): Asistencia | null {
+    const user = this.usuarios.find((usuario: any) => usuario.id === userId);
+    if (!user) return null;
+
+    const asistenciaData = this.asistencia.find((asistencia: Asistencia) => asistencia.id === user.asistencia);
+    if (!asistenciaData) {
+      console.error(`Asistencia no encontrada para el usuario con ID: ${userId}`);
+      return null;
+    }
+
+    return asistenciaData;
+  }
+
+  getRegistrosByUserId(userId: number): Registro[] | null {
+    const asistenciaData = this.getAsistenciaByUserId(userId);
+    return asistenciaData ? asistenciaData.registro : null;
+  }
 
   logout() {
     localStorage.clear();
-    this.loggedIn = false;
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('user');
   }

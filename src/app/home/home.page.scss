@@ -1,66 +1,3 @@
-.white-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw; 
-  height: 50%; 
-  background-color: #ffffff; 
-  border-top-left-radius: 16px; 
-  border-top-right-radius: 16px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box; 
-  margin: 0;
-}
-
-.action-buttons ion-button {
-  width: 90%; 
-  margin: 8px 0;
-}
-
-ion-content {
-  --background: transparent; 
-}
-
-.background-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh; 
-  background-image: url('../../assets/DUOC_01.jpg'); 
-  background-size: cover;
-  background-position: center;
-  z-index: -1; 
-}
-.white-container {
-  position: fixed;
-  bottom: 0; 
-  left: 0;
-  width: 100vw; 
-  height: 50%;
-  background-color: #ffffff; 
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box; 
-  margin: 0; 
-  border-radius: 0; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-
-
-.action-buttons ion-button {
-  width: 90%; 
-  margin: 8px 0;
-}
-
 ion-content {
   --background: transparent; 
 }
@@ -71,9 +8,9 @@ ion-content {
   left: 0;
   width: 100vw; 
   height: 100vh; 
-  background-image: url('../../assets/DUOC_01.jpg'); 
+  background-image: url('../../assets/icon/5497934.jpg'); 
   background-size: cover;
-  background-position: center;
+  background-position: left;
   z-index: -1; 
 }
 
@@ -95,14 +32,10 @@ ion-title {
   color: #ffffff;
 }
 
-ion-button {
-  --background: transparent; 
-  color: #ffffff; 
-}
-
 ion-icon {
   color: #ffffff; 
 }
+
 .floating-button-container {
   position: fixed;
   top: calc(50% + -2px); 
@@ -111,23 +44,72 @@ ion-icon {
   z-index: 20; 
 }
 
+.action-buttons ion-button {
+  width: 90%; 
+  margin: 8px 0;
+}
 
 .rounded-button {
-  background-color: #0061c9;
-  color: white; 
-  border-radius: 25px; 
+  background-color: #ffffff; /* Fondo blanco */
+  color: #6154f3; /* Color del texto en negro */
+  border-radius: 50px; /* Bordes redondeados */
   text-align: center;
-  width: 200px; 
+  font-weight: bold; 
+  font-size: 14px; /* Tamaño del texto */
+  width: 90%; 
+  max-width: 400px; /* Ancho máximo del botón */
+  height: 50px; /* Alto del botón */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  height: 50px;
+  margin-top: 20px; /* Espacio entre el botón y las tarjetas */
+}
+
+.rounded-button:active {
+  background-color: #e0e0e0; /* Fondo gris claro cuando el botón está activo */
+}
+
+ion-icon.menu-icon {
+  color: #000000; /* Color del icono del menú a la izquierda */
 }
 
 .info-card {
- 
   padding: 16px;
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 95%;
+  max-width: 400px;
+  margin-bottom: 10px; /* Reducir espacio entre las tarjetas */
+  margin-top: 60px; /* Espacio en la parte superior */
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+
+.info-card2 {
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 95%;
+  max-width: 400px;
+  margin-bottom: 10px; /* Reducir espacio entre las tarjetas */
+  margin-top: 10px; 
+  margin-left: auto; 
+  margin-right: auto;  
+}
+
+.info-card3 {
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 95%;
+  max-width: 400px;
+  margin-left: auto; 
+  margin-right: auto;  
 }
 
 .user-info {
@@ -143,12 +125,6 @@ ion-avatar {
   overflow: hidden;
 }
 
-ion-label {
-  display: flex;
-  flex-direction: column; 
-  color: #000;
-}
-
 ion-label p {
   margin: 0;
   font-size: 14px;
@@ -161,7 +137,7 @@ ion-label h3 {
   font-weight: bold;
   color: #333; 
 }
---------------------------------
+
 ion-menu {
   --width: 280px;
   --ion-background-color: #ffffff;
@@ -232,4 +208,41 @@ ion-toggle {
 ion-label {
   font-size: 14px;
 }
+
+ion-segment.transparent-segment {
+  --background: transparent;
+  --background-checked: #ffffff;
+  --background-focused: #ffffff;
+  --background-hover: #ffffff;
+  --background-disabled: rgba(255, 255, 255, 0.5);
+  --background-activated: #ffffff;
+  --indicator-color: #ffffff;
+  --color: #ffffff;
+  --color-checked: #ffffff;
+  --color-focused: #ffffff;
+  --color-hover: #ffffff;
+}
+
+ion-segment-button {
+  --background: transparent;
+  --color: #ffffff;
+  --color-checked: #ffffff;
+  --color-focused: #ffffff;
+  --color-hover: #ffffff;
+}
+
+ion-label {
+  --color: #ffffff;
+}
+
+.top-right-icon {
+  position: absolute;
+  top: -70px;
+  right: 20px;
+  font-size: 24px;
+  color: #000000;
+}
+
+
+
 
