@@ -212,23 +212,24 @@
     return asistenciaExistente ? true : false;
   }
 
-  async registrarAsistenciaEnBaseDeDatos(ramoId: string, dia: number, mes: number, anio: number) {
+  async registrarAsistenciaEnBaseDeDatos(asignatura: string, dia: number, mes: number, anio: number) {
     const idAsistencia = this.generarId();
     const alumnoId = this.user.id;
-  
+
     const nuevaAsistencia: Asistencia = {
         id: idAsistencia,
         alumnoId: alumnoId,
-        ramoId: ramoId,           
-        fecha: new Date()         
+        ramoId: asignatura,
+        fecha: new Date(anio, mes - 1, dia),
     };
-  
+
     const asistenciasAlmacenadas: Asistencia[] = JSON.parse(localStorage.getItem('asistencias') || '[]');
     asistenciasAlmacenadas.push(nuevaAsistencia);
+
     localStorage.setItem('asistencias', JSON.stringify(asistenciasAlmacenadas));
-  
     console.log('Asistencia registrada:', nuevaAsistencia);
-  }
+}
+
 
     generarId(): string {
       return Math.random().toString(36).substr(2, 9);
@@ -239,35 +240,111 @@
       return now.getDay();
     }
 
-    async scan(): Promise<string[]> {
+    async scan(): Promise<void> {
       try {
-        const isSupported = await BarcodeScanner.isSupported();
-        if (!isSupported.supported) {
-          console.error('Barcode scanner no es compatible en este dispositivo.');
-          return [];
-        }
-
-        const permissions = await BarcodeScanner.requestPermissions();
-        if (permissions.camera !== 'granted' && permissions.camera !== 'limited') {
-          console.error('Permisos de cámara no concedidos.');
-          return [];
-        }
-
-        const { barcodes } = await BarcodeScanner.scan();
-
-        try {
-          await this.getLocation();
-          console.log('Ubicación obtenida correctamente.');
-        } catch (locationError) {
-          console.error('Error al obtener la ubicación:', locationError);
-        }
-
-        return barcodes.map((barcode) => barcode.rawValue);
+          const isSupported = await BarcodeScanner.isSupported();
+          if (!isSupported.supported) {
+              console.error('Barcode scanner no es compatible en este dispositivo.');
+              return;
+          }
+  
+          const permissions = await BarcodeScanner.requestPermissions();
+          if (permissions.camera !== 'granted' && permissions.camera !== 'limited') {
+              console.error('Permisos de cámara no concedidos.');
+              return;
+          }
+  
+          const { barcodes } = await BarcodeScanner.scan();
+          if (!barcodes.length) {
+              console.error('No se detectaron códigos QR.');
+              return;
+          }
+  
+          // Asumimos que tomamos el primer QR válido
+          const qrData = barcodes[0].rawValue;
+  
+          // Validar y procesar el QR
+          const validData = this.validarQR(qrData);
+          if (!validData) {
+              await this.presentAlert('Formato de QR inválido.');
+              return;
+          }
+  
+          const { asignatura, fecha } = validData;
+  
+          // Verificar si la clase actual corresponde al QR escaneado
+          const [anio, mes, dia] = [
+              parseInt(fecha.substring(0, 4), 10),
+              parseInt(fecha.substring(4, 6), 10),
+              parseInt(fecha.substring(6, 8), 10),
+          ];
+  
+          const diaIndex = this.getDiaDeLaSemana();
+          const dia_semana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+          const nombre_dia = dia_semana[diaIndex];
+  
+          const clasesHoy = this.horario[nombre_dia];
+          if (!clasesHoy || !Array.isArray(clasesHoy)) {
+              await this.presentAlert('No tienes clases asignadas para hoy.');
+              return;
+          }
+  
+          let claseValida = false;
+  
+          for (const clase of clasesHoy) {
+              if (clase.modulo1 && Array.isArray(clase.modulo1)) {
+                  for (const modulo of clase.modulo1) {
+                      if (
+                          modulo.ramo === asignatura &&
+                          modulo.hora_inicio <= this.horaAsistencia &&
+                          modulo.hora_fin >= this.horaAsistencia
+                      ) {
+                          claseValida = true;
+                          break;
+                      }
+                  }
+              }
+              if (claseValida) break;
+          }
+  
+          if (!claseValida) {
+              await this.presentAlert('La clase escaneada no corresponde a tu horario actual.');
+              return;
+          }
+  
+          // Registrar la asistencia en la base de datos
+          const asistenciaYaRegistrada = await this.verificarAsistencia(asignatura, dia, mes, anio);
+  
+          if (asistenciaYaRegistrada) {
+              await this.presentAlert('Ya has registrado tu asistencia para esta clase hoy.');
+              return;
+          }
+  
+          await this.registrarAsistenciaEnBaseDeDatos(asignatura, dia, mes, anio);
+          await this.presentAlert('Asistencia registrada correctamente.');
       } catch (error) {
-        console.error('Error durante el escaneo:', error);
-        throw error;
+          console.error('Error durante el escaneo:', error);
+          await this.presentAlert('Error durante el proceso de escaneo.');
+          throw error;
       }
+  }
+  
+  
+  
+  private validarQR(data: string): { asignatura: string; sala: string; fecha: string } | null {
+    const regex = /^([A-Z0-9]+)\|([A-Z0-9]+)\|(\d{8})$/;
+    const match = data.match(regex);
+    if (!match) {
+        return null;
     }
+    return {
+        asignatura: match[1],
+        sala: match[2],
+        fecha: match[3],
+    };
+}
+
+  
 
     openMenu() {
       this.menu.open();

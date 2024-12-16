@@ -54,6 +54,17 @@
             "carrera": "Ingenieria Electromotriz",
             "horario": 3,
             "asistencia":3
+        },
+        {
+            "id":6,
+            "name": "a",
+            "password": "a",
+            "fullname": "Pepe Gomez",
+            "email": "pepe.g@duocuc.cl",
+            "jornada": "Vespertina",
+            "carrera": "Ingenieria Electromotriz",
+            "horario": 1,
+            "asistencia":3
         }
     ],
 
@@ -206,7 +217,7 @@
                 {
                     "modulo1":[
                         {
-                            "hora_inicio":1900,
+                            "hora_inicio":1600,
                             "hora_fin":2020,
                             "ramo":1
                         }
@@ -489,7 +500,7 @@
                     "modulo1": [
                         {
                             "hora_inicio": 1130,
-                            "hora_fin": 1250,
+                            "hora_fin": 2350,
                             "ramo": 13
                         }
                     ],
