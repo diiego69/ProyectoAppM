@@ -3,13 +3,6 @@ import { of, Observable, BehaviorSubject} from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
-interface Ramo {
-  id: number;
-  alumnoId: string;
-  nombre: string;
-  siglas: string;
-}
-
 interface Usuario{
   id: number;
   name: string;
@@ -22,16 +15,14 @@ interface Usuario{
   asistencia: number;
 }
 
-interface Registro {
-  id_clase: number;
-  dia: number;
-  mes: number;
-  anio: number;
-}
-
 interface Asistencia {
-  id: number;
-  registro: Registro[];
+  id: string;
+  fecha: Date;
+  nombre_asignatura: string,
+  seccion: string,
+  asignatura: number,
+  sala: string,
+  usuarioId: number
 }
 
 interface Horario{
@@ -41,6 +32,7 @@ interface Horario{
   Miercoles:[];
   Jueves:[];
   Viernes:[];
+  Sabado:[];
 }
 
 @Injectable({
@@ -48,7 +40,6 @@ interface Horario{
 })
 export class AuthService {
   usuarios: Usuario[] = [];
-  ramos: Ramo[] = [];
   horario: Horario[] = [];
   asistencia: Asistencia[] = [];
   private dataLoadedSubject = new BehaviorSubject<boolean>(false);
@@ -66,7 +57,6 @@ export class AuthService {
     this.http.get('assets/bd.json')
       .subscribe((data: any) => {
         this.usuarios = data['usuarios'];
-        this.ramos = data['ramos'];
         this.horario = data['horario'];
         this.asistencia = data['asistencia'];
         this.dataLoadedSubject.next(true);
@@ -132,20 +122,16 @@ export class AuthService {
   
   getAsistenciaByUserId(userId: number): Asistencia | null {
     const user = this.usuarios.find((usuario: any) => usuario.id === userId);
+    var asistenciaData : any = {};
     if (!user) return null;
-
-    const asistenciaData = this.asistencia.find((asistencia: Asistencia) => asistencia.id === user.asistencia);
-    if (!asistenciaData) {
-      console.error(`Asistencia no encontrada para el usuario con ID: ${userId}`);
-      return null;
+    for(const modulo of this.horario){
+        asistenciaData = this.asistencia.find(() => modulo.id === user.asistencia);
+        if (!asistenciaData) {
+          console.error(`Asistencia no encontrada para el usuario con ID: ${userId}`);
+          return null;
+        }
     }
-
     return asistenciaData;
-  }
-
-  getRegistrosByUserId(userId: number): Registro[] | null {
-    const asistenciaData = this.getAsistenciaByUserId(userId);
-    return asistenciaData ? asistenciaData.registro : null;
   }
 
   logout() {

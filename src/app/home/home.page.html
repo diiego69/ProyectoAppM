@@ -126,13 +126,13 @@
                     <ul>
                       <li *ngFor="let modulo of horario[day]">
                         <div *ngFor="let mod of modulo.modulo1">
-                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                          <p>{{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
                         </div>
                         <div *ngFor="let mod of modulo.modulo2">
-                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                          <p>{{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
                         </div>
                         <div *ngFor="let mod of modulo.modulo3">
-                          <p>{{ getRamoName(mod.ramo) }}: {{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
+                          <p>{{ convertToTimeFormat(mod.hora_inicio) }} - {{ convertToTimeFormat(mod.hora_fin) }}</p>
                         </div>
                       </li>
                     </ul>
