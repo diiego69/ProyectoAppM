@@ -1,17 +1,6 @@
 {
     "usuarios":[
         {
-            "id":1,
-            "name": "admin",
-            "password": "admin",
-            "fullname": "administrador",
-            "email": "admin@duoc.cl",
-            "jornada": "Completa",
-            "carrera": "administrador",
-            "horario": 0,
-            "asistencia":0
-        },
-        {
             "id":2,
             "name": "diego",
             "password": "diego",
@@ -23,28 +12,6 @@
             "asistencia":1
         },
         {
-            "id":3,
-            "name": "benjamin",
-            "password": "benjamin",
-            "fullname": "Benjamin Morales",
-            "email": "bi.morales@duocuc.cl",
-            "jornada": "Vespertina",
-            "carrera": "Ingenieria Informatica",
-            "horario": 1,
-            "asistencia":2
-        },
-        {
-            "id":4,
-            "name": "juan",
-            "password": "juan",
-            "fullname": "Juan Perez",
-            "email": "juan.p@duocuc.cl",
-            "jornada": "Diurna",
-            "carrera": "Ingenieria Electromotriz",
-            "horario": 2,
-            "asistencia":3
-        },
-        {
             "id":5,
             "name": "p",
             "password": "p",
@@ -54,103 +21,11 @@
             "carrera": "Ingenieria Electromotriz",
             "horario": 3,
             "asistencia":3
-        },
-        {
-            "id":6,
-            "name": "a",
-            "password": "a",
-            "fullname": "Pepe Gomez",
-            "email": "pepe.g@duocuc.cl",
-            "jornada": "Vespertina",
-            "carrera": "Ingenieria Electromotriz",
-            "horario": 1,
-            "asistencia":3
         }
     ],
 
-    "ramos":[
-        {
-            "id":1,
-            "nombre":"PROGRAMACION DE APLICACIONES MOVILES",
-            "siglas":"008V"
-        },
-        {
-            "id":2,
-            "nombre":"ARQUITECTURA",
-            "siglas":"008V"
-        },
-        {
-            "id":3,
-            "nombre":"CALIDAD DE SOFTWARE",
-            "siglas":"008V"
-        },
-        {
-            "id":4,
-            "nombre":"ARQUITECTURA",
-            "siglas":"008V"
-        },
-        {
-            "id":5,
-            "nombre":"ESTADISTICA DESCRIPTIVA",
-            "siglas":"010V"
-        },
-        {
-            "id":6,
-            "nombre":"ARQUITECTURA",
-            "siglas":"008V"
-        }, 
-        {
-            "id":7,
-            "nombre":"ETICA PARA EL TRABAJO",
-            "siglas":"006V"
-        },
-        {
-            "id":8,
-            "nombre":"INGLES INTERMEDIO",
-            "siglas":"018V"
-        },
-        {
-            "id":9,
-            "nombre":"PROCESO DE PORTAFOLIO 4",
-            "siglas":"008V"
-        },
-        {
-            "id":10,
-            "nombre":"AUTOTRONICA CIRCUITOS CORRIENTE CONTINUA",
-            "siglas":"003D"
-        },
-        {
-            "id":11,
-            "nombre":"MANTENIMIENTO AUTOMOTRIZ",
-            "siglas":"003D"
-        },
-        {
-            "id":12,
-            "nombre":"HERRAMIENTAS APLICADAS AL MANTENIMIENTO",
-            "siglas":"003D"
-        },
-        {
-            "id":13,
-            "nombre":"HABILIDADES BASICAS DE COMUNICACION",
-            "siglas":"010D"
-        },
-        {
-            "id":14,
-            "nombre":"NIVELACION MATEMATICA",
-            "siglas":"014D"
-        }
-    ],
-    
     "horario":[
         {
-            "id":0,
-            "Lunes":"",
-            "Martes":"",
-            "Miercoles":"",
-            "Jueves":"",
-            "Viernes":""
-        }
-        ,{
             "id":1,
             "Lunes":[
                 {
@@ -158,14 +33,20 @@
                         {
                             "hora_inicio":1900,
                             "hora_fin":2020,
-                            "ramo":7
+                            "nombre":"ETICA PARA EL TRABAJO",
+                            "seccion":"006V",
+                            "asignatura":7,
+                            "sala":"705"
                         }
                     ],
                     "modulo2":[
                         {
                             "hora_inicio":2030,
                             "hora_fin":2150,
-                            "ramo":8
+                            "nombre":"INGLES INTERMEDIO",
+                            "seccion":"018V",
+                            "asignatura":8,
+                            "sala":"605"
                         }
                     ]
                 }
@@ -173,24 +54,33 @@
             "Martes":[
                 {
                     "modulo1":[
-                        {
+                        {   
+                            "nombre":"PROGRAMACION DE APLICACIONES MOVILES",
+                            "seccion":"008V",
+                            "asignatura":1,
+                            "sala":"L7",
                             "hora_inicio":1900,
-                            "hora_fin":2020,
-                            "ramo":1
+                            "hora_fin":2020
                         }
                     ],
                     "modulo2":[
                         {
                             "hora_inicio":2030,
                             "hora_fin":2110,
-                            "ramo":1
+                            "nombre":"PROGRAMACION DE APLICACIONES MOVILES",
+                            "seccion":"008V",
+                            "asignatura":1,
+                            "sala":"L7"
                         }
                     ],
                     "modulo3":[
                         {
                             "hora_inicio":2110,
                             "hora_fin":2230,
-                            "ramo":8
+                            "nombre":"INGLES INTERMEDIO",
+                            "seccion":"018V",
+                            "asignatura":8,
+                            "sala":"605"
                         }
                     ]
                 }
@@ -201,14 +91,20 @@
                         {
                             "hora_inicio":1900,
                             "hora_fin":2020,
-                            "ramo":5
+                            "nombre":"ESTADISTICA DESCRIPTIVA",
+                            "seccion":"010V",
+                            "asignatura":5,
+                            "sala":"L3"
                         }
                     ],
                     "modulo2":[
                         {
                             "hora_inicio":2030,
                             "hora_fin":2150,
-                            "ramo":8
+                            "nombre":"INGLES INTERMEDIO",
+                            "seccion":"018V",
+                            "asignatura":8,
+                            "sala":"605"
                         }
                     ]
                 }
@@ -217,23 +113,32 @@
                 {
                     "modulo1":[
                         {
+                            "nombre":"PROGRAMACION DE APLICACIONES MOVILES",
+                            "seccion":"008V",
+                            "asignatura":1,
+                            "sala":"L7",
                             "hora_inicio":1600,
-                            "hora_fin":2020,
-                            "ramo":1
+                            "hora_fin":2020
                         }
                     ],
                     "modulo2":[
                         {
                             "hora_inicio":2030,
                             "hora_fin":2110,
-                            "ramo":3
+                            "nombre":"CALIDAD DE SOFTWARE",
+                            "seccion":"008V",
+                            "asignatura":3,
+                            "sala":"L8"
                         }
                     ],
                     "modulo3":[
                         {
                             "hora_inicio":2110,
                             "hora_fin":2230,
-                            "ramo":3
+                            "nombre":"INGLES INTERMEDIO",
+                            "seccion":"018V",
+                            "asignatura":8,
+                            "sala":"605"
                         }
                     ]
                 }
@@ -244,21 +149,30 @@
                         {
                             "hora_inicio":1900,
                             "hora_fin":2020,
-                            "ramo":5
+                             "nombre":"ESTADISTICA DESCRIPTIVA",
+                            "seccion":"010V",
+                            "asignatura":5,
+                            "sala":"L3"
                         }
                     ],
                     "modulo2":[
                         {
                             "hora_inicio":2030,
                             "hora_fin":2110,
-                            "ramo":3
+                            "nombre":"CALIDAD DE SOFTWARE",
+                            "seccion":"008V",
+                            "asignatura":3,
+                            "sala":"L8"
                         }
                     ],
                     "modulo3":[
                         {
                             "hora_inicio":2110,
                             "hora_fin":2230,
-                            "ramo":8
+                            "nombre":"INGLES INTERMEDIO",
+                            "seccion":"018V",
+                            "asignatura":8,
+                            "sala":"605"
                         }
                     ]
                 }
@@ -269,121 +183,20 @@
                         {
                             "hora_inicio":1130,
                             "hora_fin":1250,
-                            "ramo":9
+                            "nombre":"PROCESO DE PORTAFOLIO 4",
+                            "seccion":"008V",
+                            "asignatura":9,
+                            "sala":"L4"
                         }
                     ],
                     "modulo2":[
                         {
                             "hora_inicio":1300,
                             "hora_fin":1640,
-                            "ramo":6
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id":2,
-            "Lunes":[
-                {
-                    "modulo1":[
-                        {
-                            "hora_inicio":830,
-                            "hora_fin":950,
-                            "ramo":10
-                        }
-                    ],
-                    "modulo2":[
-                        {
-                            "hora_inicio":1130,
-                            "hora_fin":1250,
-                            "ramo":13
-                        }
-                    ]
-                }
-            ],
-            "Martes":[
-                {
-                    "modulo1":[
-                        {
-                            "hora_inicio":1300,
-                            "hora_fin":1420,
-                            "ramo":14
-                        }
-                    ],
-                    "modulo2":[
-                        {
-                            "hora_inicio":1430,
-                            "hora_fin":1450,
-                            "ramo":14
-                        }
-                    ]
-                }
-            ],
-            "Miercoles":[
-                {
-                    "modulo1":[
-                        {
-                            "hora_inicio":1130,
-                            "hora_fin":1250,
-                            "ramo":10
-                        }
-                    ],
-                    "modulo2":[
-                        {
-                            "hora_inicio":1300,
-                            "hora_fin":1420,
-                            "ramo":11
-                        }
-                    ],
-                    "modulo3":[
-                        {
-                            "hora_inicio":1620,
-                            "hora_fin":1540,
-                            "ramo":13
-                        }
-                    ]
-                }
-            ],
-            "Jueves":[
-                {
-                    "modulo1":[
-                        {
-                            "hora_inicio":830,
-                            "hora_fin":950,
-                            "ramo":12
-                        }
-                    ],
-                    "modulo2":[
-                        {
-                            "hora_inicio":1130,
-                            "hora_fin":1250,
-                            "ramo":10
-                        }
-                    ],
-                    "modulo3":[
-                        {
-                            "hora_inicio":1520,
-                            "hora_fin":1640,
-                            "ramo":11
-                        }
-                    ]
-                }
-            ],
-            "Viernes":[
-                {
-                    "modulo1":[
-                        {
-                            "hora_inicio":1130,
-                            "hora_fin":1250,
-                            "ramo":14
-                        }
-                    ],
-                    "modulo2":[
-                        {
-                            "hora_inicio":1500,
-                            "hora_fin":1700,
-                            "ramo":12
+                            "nombre":"ARQUITECTURA",
+                            "seccion":"008V",
+                            "asignatura":4,
+                            "sala":"L5"
                         }
                     ]
                 }
@@ -395,16 +208,12 @@
                 {
                     "modulo1": [
                         {
-                            "hora_inicio": 1900,
-                            "hora_fin": 2020,
-                            "ramo": 10
-                        }
-                    ],
-                    "modulo2": [
-                        {
-                            "hora_inicio": 2030,
-                            "hora_fin": 2150,
-                            "ramo": 13
+                            "hora_inicio": 0,
+                            "hora_fin": 2300,
+                            "nombre":"ETICA PARA EL TRABAJO",
+                            "seccion":"006V",
+                            "asignatura":7,
+                            "sala":"705"
                         }
                     ]
                 }
@@ -413,16 +222,12 @@
                 {
                     "modulo1": [
                         {
-                            "hora_inicio": 1900,
-                            "hora_fin": 2020,
-                            "ramo": 12
-                        }
-                    ],
-                    "modulo2": [
-                        {
-                            "hora_inicio": 2030,
-                            "hora_fin": 2110,
-                            "ramo": 14
+                            "hora_inicio": 0,
+                            "hora_fin": 2359,
+                            "nombre":"ETICA PARA EL TRABAJO",
+                            "seccion":"006V",
+                            "asignatura":7,
+                            "sala":"705"
                         }
                     ]
                 }
@@ -431,23 +236,12 @@
                 {
                     "modulo1": [
                         {
-                            "hora_inicio": 1900,
-                            "hora_fin": 2020,
-                            "ramo": 10
-                        }
-                    ],
-                    "modulo2": [
-                        {
-                            "hora_inicio": 2030,
-                            "hora_fin": 2150,
-                            "ramo": 12
-                        }
-                    ],
-                    "modulo3": [
-                        {
-                            "hora_inicio": 30,
-                            "hora_fin": 400,
-                            "ramo": 12
+                            "hora_inicio": 0,
+                            "hora_fin": 2359,
+                            "nombre":"ETICA PARA EL TRABAJO",
+                            "seccion":"006V",
+                            "asignatura":7,
+                            "sala":"705"
                         }
                     ]
                 }
@@ -457,22 +251,11 @@
                     "modulo1": [
                         {
                             "hora_inicio": 0,
-                            "hora_fin": 820,
-                            "ramo": 11
-                        }
-                    ],
-                    "modulo2": [
-                        {
-                            "hora_inicio": 2030,
-                            "hora_fin": 2110,
-                            "ramo": 14
-                        }
-                    ],
-                    "modulo3": [
-                        {
-                            "hora_inicio": 2110,
-                            "hora_fin": 2230,
-                            "ramo": 13
+                            "hora_fin": 2359,
+                            "nombre":"ETICA PARA EL TRABAJO",
+                            "seccion":"006V",
+                            "asignatura":7,
+                            "sala":"705"
                         }
                     ]
                 }
@@ -482,15 +265,11 @@
                     "modulo1": [
                         {
                             "hora_inicio": 0,
-                            "hora_fin": 800,
-                            "ramo": 12
-                        }
-                    ],
-                    "modulo2": [
-                        {
-                            "hora_inicio": 2030,
-                            "hora_fin": 2110,
-                            "ramo": 14
+                            "hora_fin": 2359,
+                            "nombre":"ETICA PARA EL TRABAJO",
+                            "seccion":"006V",
+                            "asignatura":7,
+                            "sala":"705"
                         }
                     ]
                 }
@@ -499,16 +278,12 @@
                 {
                     "modulo1": [
                         {
-                            "hora_inicio": 1130,
-                            "hora_fin": 2350,
-                            "ramo": 13
-                        }
-                    ],
-                    "modulo2": [
-                        {
-                            "hora_inicio": 1300,
-                            "hora_fin": 1640,
-                            "ramo": 12
+                            "hora_inicio": 0,
+                            "hora_fin": 2359,
+                            "nombre":"ETICA PARA EL TRABAJO",
+                            "seccion":"006V",
+                            "asignatura":7,
+                            "sala":"705"
                         }
                     ]
                 }
@@ -517,19 +292,8 @@
     ],
     "asistencia":[
         {
-            "id": 0,
-            "registro": []
-        },
-        {
             "id": 1,
             "registro": [
-                {"id_clase": 7, "dia": 20, "mes": 9, "anio": 2024},
-                {"id_clase": 8, "dia": 20, "mes": 9, "anio": 2024},
-                {"id_clase": 1, "dia": 21, "mes": 9, "anio": 2024},
-                {"id_clase": 8, "dia": 21, "mes": 9, "anio": 2024},
-                {"id_clase": 5, "dia": 22, "mes": 9, "anio": 2024},
-                {"id_clase": 8, "dia": 22, "mes": 9, "anio": 2024},
-                {"id_clase": 1, "dia": 23, "mes": 9, "anio": 2024},
                 {"id_clase": 3, "dia": 23, "mes": 9, "anio": 2024},
                 {"id_clase": 8, "dia": 23, "mes": 9, "anio": 2024},
                 {"id_clase": 5, "dia": 24, "mes": 9, "anio": 2024},
@@ -542,44 +306,11 @@
             ]
         },
         {
-            "id": 2,
+            "id": 3,
             "registro": [
                 {"id_clase": 7, "dia": 27, "mes": 9, "anio": 2024},
                 {"id_clase": 8, "dia": 27, "mes": 9, "anio": 2024},
-                {"id_clase": 1, "dia": 28, "mes": 9, "anio": 2024},
-                {"id_clase": 8, "dia": 28, "mes": 9, "anio": 2024},
-                {"id_clase": 5, "dia": 29, "mes": 9, "anio": 2024},
-                {"id_clase": 8, "dia": 29, "mes": 9, "anio": 2024},
-                {"id_clase": 1, "dia": 30, "mes": 9, "anio": 2024},
-                {"id_clase": 3, "dia": 30, "mes": 9, "anio": 2024},
-                {"id_clase": 8, "dia": 30, "mes": 9, "anio": 2024},
-                {"id_clase": 5, "dia": 1, "mes": 10, "anio": 2024},
-                {"id_clase": 8, "dia": 1, "mes": 10, "anio": 2024},
-                {"id_clase": 10, "dia": 2, "mes": 10, "anio": 2024}
-            ]
-        },{
-            "id": 3,
-            "registro": [
-                {"id_clase": 10, "dia": 27, "mes": 9, "anio": 2024},
-                {"id_clase": 13, "dia": 27, "mes": 9, "anio": 2024},
-                {"id_clase": 11, "dia": 28, "mes": 9, "anio": 2024},
-                {"id_clase": 10, "dia": 28, "mes": 9, "anio": 2024},
-                {"id_clase": 14, "dia": 29, "mes": 9, "anio": 2024},
-                {"id_clase": 13, "dia": 29, "mes": 9, "anio": 2024},
-                {"id_clase": 12, "dia": 30, "mes": 9, "anio": 2024},
-                {"id_clase": 13, "dia": 30, "mes": 9, "anio": 2024},
-                {"id_clase": 12, "dia": 30, "mes": 9, "anio": 2024},
-                {"id_clase": 10, "dia": 1, "mes": 10, "anio": 2024},
-                {"id_clase": 10, "dia": 1, "mes": 10, "anio": 2024},
-                {"id_clase": 13, "dia": 2, "mes": 10, "anio": 2024},
-                {"id_clase": 14, "dia": 3, "mes": 10, "anio": 2024},
-                {"id_clase": 14, "dia": 3, "mes": 10, "anio": 2024},
-                {"id_clase": 10, "dia": 4, "mes": 10, "anio": 2024},
-                {"id_clase": 11, "dia": 4, "mes": 10, "anio": 2024},
-                {"id_clase": 14, "dia": 5, "mes": 10, "anio": 2024},
-                {"id_clase": 11, "dia": 5, "mes": 10, "anio": 2024},
-                {"id_clase": 13, "dia": 6, "mes": 10, "anio": 2024},
-                {"id_clase": 10, "dia": 6, "mes": 10, "anio": 2024}
+                {"id_clase": 1, "dia": 28, "mes": 9, "anio": 2024}
             ]
         }
     ]

@@ -153,7 +153,7 @@
       let asistenciaRegistrada = false;
     
       for (const clase of clasesHoy) {
-          for (const [key, moduloArray] of Object.entries(clase)) {
+          for (const [moduloArray] of Object.entries(clase)) {
               if (Array.isArray(moduloArray)) {
                   for (const modulo of moduloArray) {
                       if (modulo.hora_inicio !== undefined && modulo.hora_fin !== undefined) {
@@ -278,7 +278,6 @@
               parseInt(fecha.substring(4, 6), 10),
               parseInt(fecha.substring(6, 8), 10),
           ];
-  
           const diaIndex = this.getDiaDeLaSemana();
           const dia_semana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
           const nombre_dia = dia_semana[diaIndex];
@@ -290,11 +289,11 @@
           }
   
           let claseValida = false;
-  
+          this.presentAlert("Asignatura: " + asignatura);
           for (const clase of clasesHoy) {
               if (clase.modulo1 && Array.isArray(clase.modulo1)) {
-                  for (const modulo of clase.modulo1) {
-                      if (
+                  for (const modulo of clase.modulo1) {  
+                    if (
                           modulo.ramo === asignatura &&
                           modulo.hora_inicio <= this.horaAsistencia &&
                           modulo.hora_fin >= this.horaAsistencia
@@ -330,19 +329,19 @@
   }
   
   
-  
-  private validarQR(data: string): { asignatura: string; sala: string; fecha: string } | null {
-    const regex = /^([A-Z0-9]+)\|([A-Z0-9]+)\|(\d{8})$/;
+  //modificar para el qr del profe
+  private validarQR(data: string): { asignatura: string; fecha: string } | null {
+    const regex = /^([A-Z0-9]+)\|(\d{8})$/;
     const match = data.match(regex);
+    this.presentAlert("Valor de match: "+ match + ", Valor de regex");
     if (!match) {
         return null;
     }
     return {
         asignatura: match[1],
-        sala: match[2],
-        fecha: match[3],
+        fecha: match[2],
     };
-}
+  }
 
   
 
